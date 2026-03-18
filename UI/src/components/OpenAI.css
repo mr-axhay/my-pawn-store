@@ -1,0 +1,141 @@
+.chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 340px;
+  height: 480px;
+  background: #0f172a;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.1s ease; 
+}
+
+/* Collapsed mode */
+.chatbot.collapsed {
+  width: 60px;   /* 👈 small icon size */
+  height: 60px;
+  border-radius: 50%; /* 👈 make it circular */
+  overflow: hidden;
+}
+
+/* Header styling */
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* When expanded → normal header */
+.chatbot:not(.collapsed) .chat-header {
+  justify-content: center;
+  font-size: 16px;
+}
+
+/* When collapsed → center icon */
+.chatbot.collapsed .chat-header {
+  font-size: 24px;
+}
+
+/* Header */
+.chat-header {
+  padding: 14px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  font-weight: 600;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* Body */
+.chat-body {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Message wrapper */
+.message {
+  display: flex;
+  margin: 6px 0;
+}
+
+/* User alignment */
+.message.user {
+  justify-content: flex-end;
+}
+
+/* Bot alignment */
+.message.bot {
+  justify-content: flex-start;
+}
+
+/* Chat bubbles */
+.bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* User bubble */
+.message.user .bubble {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+/* Bot bubble */
+.message.bot .bubble {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-bottom-left-radius: 4px;
+}
+
+/* Footer */
+.chat-footer {
+  display: flex;
+  padding: 10px;
+  background: #020617;
+}
+
+/* Input */
+.chat-footer input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #1e293b;
+  color: white;
+}
+
+/* Button */
+.chat-footer button {
+  margin-left: 8px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.chat-footer button:hover {
+  transform: scale(1.05);
+}
+
+.spinner-border{
+  margin: 4px 0 0 6px;
+}

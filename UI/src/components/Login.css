@@ -1,0 +1,86 @@
+/* Center container */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000000, #1f2937);
+  font-family: Arial, sans-serif;
+}
+
+/* Glass form box */
+.form-box {
+  width: 400px;
+  padding: 40px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+/* Title */
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Output message */
+.form-output {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #3b82f6;
+}
+
+/* Form group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/* Label */
+.form-group label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+/* Input styling */
+.input-style {
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #4b5563;
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.input-style:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+  outline: none;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  background: #3b82f6;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #2563eb;
+}

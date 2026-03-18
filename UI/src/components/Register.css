@@ -1,0 +1,105 @@
+.input-style {
+  @apply w-full px-4 py-2 rounded-md bg-black/40 border border-gray-600 text-white text-sm outline-none transition-all duration-300;
+}
+
+.input-style:focus {
+  @apply border-blue-500 shadow-md;
+}
+
+
+
+
+/* Center whole form */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4e73df, #1cc88a);
+  font-family: Arial, sans-serif;
+}
+
+/* Form box */
+.form-box {
+  padding: 40px;
+  border-radius: 10px;
+  width: 500px;
+  margin: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Each form group */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Inputs, select, textarea */
+.form-box input,
+.form-box select,
+.form-box textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc !important;
+  font-size: 14px;
+  transition: 0.3s;
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Focus effect */
+.form-box input:focus,
+.form-box select:focus,
+.form-box textarea:focus {
+  border-color: #4e73df;
+  outline: none;
+  box-shadow: 0 0 5px rgba(78, 115, 223, 0.5);
+}
+
+/* Textarea height */
+.form-box textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* Radio group */
+.radio-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.radio-group label {
+  font-weight: normal;
+  color: #555;
+}
+
+/* Submit button */
+.form-box button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-box button:hover {
+  background: #2e59d9;
+}
+
+.input-style option {
+  background: rgba(0, 0, 0, 0.4) !important;
+  background-color: #000 !important;
+}

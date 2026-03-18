@@ -1,0 +1,81 @@
+
+/* --------------Wrapper */
+.Product-wrapper {
+  width: 100%;
+  padding: 30px;
+}
+
+/* Header */
+.Product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.Product-header h2 {
+  color: #333;
+}
+
+/* Grid Layout */
+.Product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
+.Product-card {
+  cursor: pointer;
+  transition: 0.2s;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(135deg, #111827, #1f2937);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: 0.3s;
+}
+
+.Product-card:hover {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+  transform: translateY(-5px);
+}
+
+/* Icons */
+.Product-card i {
+  position: absolute;
+  top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.Product-card .bi-pencil-fill {
+  left: 10px;
+  color: #fff;
+}
+
+.Product-card .bi-x-octagon-fill {
+  right: 10px;
+  color: #ff0000;
+}
+
+/* Image */
+.Product-avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* Title */
+.Product-card h3 {
+  margin: 10px 0;
+  color: #fff;
+}
+
+/* Button spacing */
+.Product-card button {
+  margin-top: 10px;
+}
