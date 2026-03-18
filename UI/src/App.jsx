@@ -18,7 +18,6 @@ import SubCategories from "./components/SubCategories";
 import AddSubCategory from "./components/AddSubCategory";
 import { useLocation } from "react-router-dom";
 import SubAdminHomePage from "./components/SubAdminHomePage";
-import OpenAI from "./components/openAI";
 
 
 
@@ -47,11 +46,10 @@ function App() {
           <Route path='/addProduct' element={<AddProduct />} ></Route>
           <Route path='/product' element={<Product />} ></Route>
           <Route path='/viewProduct/:name' element={<ViewProduct />} ></Route>
-          <Route path='/chat' element={<OpenAI />} ></Route>
+          
           <Route path='/subadmin' element={<SubAdminHomePage />} ></Route>
         </Routes>
       </div>
-      <OpenAI />
       {/* <Footer /> */}
     </main>
   );
