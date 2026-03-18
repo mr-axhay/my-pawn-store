@@ -9,7 +9,6 @@ import CategoryRouter from './routes/category.router.js';
 import SubCategoryRouter from './routes/subcategory.js';
 import ForgetPassword from './controller/fp.controller.js';
 import ProductRouter from './routes/product.router.js';
-import aiChatRoute from "./routes/aiChat.js";
 import chatRouter from "./routes/chat.router.js";
 import paymentRoutes from "./routes/payment.routes.js";
 
@@ -34,7 +33,6 @@ app.use(fileUpload());
 
 //route level middleware
 app.use("/chat", chatRouter);
-app.use("/api/ai", aiChatRoute);
 app.use("/user", UserRouter);
 app.use("/category", CategoryRouter);
 app.use("/subcategory", SubCategoryRouter);
