@@ -20,7 +20,6 @@ import { useLocation } from "react-router-dom";
 import SubAdminHomePage from "./components/SubAdminHomePage";
 import OpenAI from "./components/openAI";
 
-
 function App() {
   const location = useLocation();
 
