@@ -44,10 +44,11 @@ export var deleteUser = async (req, res) => {
     let cDetails = await CategorySchemaModel.findOne(JSON.parse(req.body.condition_obj));
     if (cDetails) {
       let category = await CategorySchemaModel.deleteOne(JSON.parse(req.body.condition_obj));
-      if (category)
-        res.status(200).json({ "status": true });
+      var cList = await CategorySchemaModel.find();
+      if (cList.length != 0)
+        res.status(200).json({ "status": true, "info": cList });
       else
-        res.status(500).json({ "status": false });
+        res.status(404).json({ "status": false });
     }
     else
       res.status(404).json({ "status": "Requested resource not available" });

@@ -18,6 +18,9 @@ import SubCategories from "./components/SubCategories";
 import AddSubCategory from "./components/AddSubCategory";
 import { useLocation } from "react-router-dom";
 import SubAdminHomePage from "./components/SubAdminHomePage";
+import EditProduct from "./components/EditProduct";
+import OpenAI from "./components/OpenAI";
+import ExpertDashboard from "./components/ExpertDashboard";
 
 
 
@@ -45,11 +48,16 @@ function App() {
           <Route path='/userHome' element={<UserHome />} ></Route>
           <Route path='/addProduct' element={<AddProduct />} ></Route>
           <Route path='/product' element={<Product />} ></Route>
-          <Route path='/viewProduct/:name' element={<ViewProduct />} ></Route>
-          
+          <Route path='/viewProduct/:id' element={<ViewProduct />} ></Route>
+          <Route path='/editProduct/:id' element={<AddProduct />} ></Route>{/* /:name */}
+          <Route path='/chat' element={<OpenAI />} ></Route>
           <Route path='/subadmin' element={<SubAdminHomePage />} ></Route>
+          <Route path='/expertDashboard' element={<ExpertDashboard />} ></Route>
+
+
         </Routes>
       </div>
+      <OpenAI />
       {/* <Footer /> */}
     </main>
   );

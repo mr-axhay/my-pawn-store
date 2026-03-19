@@ -11,6 +11,7 @@ import ForgetPassword from './controller/fp.controller.js';
 import ProductRouter from './routes/product.router.js';
 import chatRouter from "./routes/chat.router.js";
 import paymentRoutes from "./routes/payment.routes.js";
+import evaluateRoutes from "./routes/evaluate.js";
 
 const razorpayInstance = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
@@ -40,6 +41,7 @@ app.use("/subcategory", SubCategoryRouter);
 app.post("/forgetpassword", ForgetPassword);
 app.use("/api/payment", paymentRoutes);
 app.use("/product", ProductRouter);
+app.use("/api/evaluate", evaluateRoutes);
 app.listen(3001);
 console.log("Server invoked at link http://localhost:3001");
 

@@ -89,8 +89,8 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black">
-      <div className="flex w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+    <div className="min-h-screen p-4 flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black">
+      <div className="flex w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-white/10">
 
         {/* LEFT IMAGE */}
         <div className="w-1/2 hidden md:block relative">
@@ -103,7 +103,7 @@ const Register = () => {
         </div>
 
         {/* RIGHT FORM */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-8 bg-white/5 backdrop-blur-xl">
+        <div className="w-full md:w-1/2 flex items-center justify-center p-10 bg-white/5 backdrop-blur-xl">
 
           <form
             onSubmit={handleSubmit}

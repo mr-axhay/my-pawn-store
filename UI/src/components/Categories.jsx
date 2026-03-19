@@ -24,6 +24,21 @@ function Categories() {
         event.stopPropagation();
         navigate(`/addSubCategory/${name}`);
     }
+
+     const removeCategory = (name, event) => {
+        event.stopPropagation();
+        axios.delete(__categoryapiurl + "delete",
+            {
+                data: {
+                    condition_obj: JSON.stringify({ catnm: name })
+                }
+            }
+        ).then((response) => {
+             setCategories(response.data.info);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -55,11 +70,12 @@ function Categories() {
 
                     {categories.map((cat, index) => (
                         <div className="category-card" key={cat._id}
-                            onClick={()=>goToSubCategory(cat.catnm)}>
+                            onClick={() => goToSubCategory(cat.catnm)}>
 
                             {/* <Button title='edit'></Button> */}
                             <i className="bi bi-pencil-fill"></i>
-                            <i className="bi bi-x-octagon-fill"></i>
+                            <i className="bi bi-x-octagon-fill"
+                            onClick={($event) => removeCategory(cat.catnm,$event)}></i>
                             <div className='image'>
                                 <img
                                     src={`../../public/assets/uploads/caticons/${cat.caticonnm}`}

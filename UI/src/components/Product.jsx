@@ -9,19 +9,29 @@ function Product() {
 
     const navigate = useNavigate();
 
+    const editProduct = (event) => {
+        event.stopPropagation();
+        //navigate to add categ
+        navigate('/editProduct');
+    }
     const addProduct = () => {
         //navigate to add categ
         navigate('/addProduct');
     }
-    const viewProduct = (name, event) => {
-        event.stopPropagation();
+    const viewProduct = (id) => {
         //navigate to add categ
-        navigate(`/viewProduct/${name}`);
+        navigate(`/viewProduct/${id}`);
     }
     const [Product, setProduct] = useState([]);
-    const removeProduct = (name,event) => {
-        event.stopPropagation()
-        axios.delete(__productapiurl + "delete", { catnm: name }).then((response) => {
+    const removeProduct = (name, event) => {
+        event.stopPropagation();
+        axios.delete(__productapiurl + "delete",
+            {
+                data: {
+                    condition_obj: JSON.stringify({ catnm: name })
+                }
+            }
+        ).then((response) => {
             setProduct(response.data.info);
         }).catch((error) => {
             console.log(error);
@@ -57,12 +67,13 @@ function Product() {
                     {Product.length ?
                         (Product.map((cat, index) => (
                             <div className="Product-card" key={cat._id}
-                                onClick={() => viewProduct(cat.catnm)}>
+                                onClick={() => viewProduct(cat._id)}>
 
                                 {/* <Button title='edit'></Button> */}
-                                <i className="bi bi-pencil-fill"></i>
+                                <i className="bi bi-pencil-fill"
+                                    onClick={($event) => editProduct(/* cat.catnm, */$event)}></i>
                                 <i className="bi bi-x-octagon-fill"
-                                    onClick={($event) => removeProduct(cat.catnm,$event)}></i>
+                                    onClick={($event) => removeProduct(cat.catnm, $event)}></i>
                                 <div className='image'>
                                     <img
                                         src={`../../public/assets/uploads/caticons/${cat.caticonnm}`}

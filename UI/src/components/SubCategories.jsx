@@ -3,7 +3,7 @@ import { __subcategoryapiurl } from '../API_URL';
 import Button from './Button';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Categories.css';
+import './SubCategories.css';
 
 function SubCategories() {
 
@@ -14,7 +14,20 @@ function SubCategories() {
         navigate(`/addSubCategory/${name}`);
     }
     const [categories, setCategories] = useState([]);
-
+    const removeSubCategory = (name, event) => {
+        event.stopPropagation();
+        axios.delete(__subcategoryapiurl + "delete",
+            {
+                data: {
+                    condition_obj: JSON.stringify({ subcatnm: name })
+                }
+            }
+        ).then((response) => {
+            setCategories(response.data.info);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
     useEffect(() => {
         axios.get(__subcategoryapiurl + "fetch", {
             params: { "catnm": name }
@@ -48,7 +61,8 @@ function SubCategories() {
 
                                 {/* <Button title='edit'></Button> */}
                                 <i className="bi bi-pencil-fill"></i>
-                                <i className="bi bi-x-octagon-fill"></i>
+                                <i className="bi bi-x-octagon-fill"
+                                    onClick={($event) => removeSubCategory(cat.subcatnm, $event)}></i>
                                 <div className='image'>
                                     <img
                                         src={`../../public/assets/uploads/subcaticons/${cat.subcaticonnm}`}
