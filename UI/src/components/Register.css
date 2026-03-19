@@ -103,3 +103,13 @@
   background: rgba(0, 0, 0, 0.4) !important;
   background-color: #000 !important;
 }
+
+.text-field {
+  border-radius: 5px !important;
+  border: 1px solid #4b5563 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+.error{
+  color: #ff0000;
+}

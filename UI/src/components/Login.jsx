@@ -7,108 +7,150 @@ import './Login.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const ImageClipBox = ({ src, clipClass }) => (
-    <div className={clipClass}>
-        <img src={src} />
-    </div>
-);
 
 const Login = () => {
-
-
     const navigate = useNavigate();
-    const [output, setOutput] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
-    const handleSubmit = () => {
-        const userDetails = { "email": email, "password": password };
-        axios.post(__userapiurl + "login", userDetails).then((response) => {
-            const users = response.data.info;
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("name", users.name);
-            localStorage.setItem("email", users.email);
-            localStorage.setItem("mobile", users.mobile);
-            localStorage.setItem("address", users.address);
-            localStorage.setItem("city", users.city);
-            localStorage.setItem("gender", users.gender);
-            localStorage.setItem("info", users.info);
-            localStorage.setItem("role", users.role);
+    const [errors, setErrors] = useState({});
 
-            if (users.role === "admin")
-                navigate("/admin");
-            else if (users.role === "subadmin")
-                navigate("/subadmin");
-            else
-                navigate("/user");
+    const validate = () => {
+        let newErrors = {};
 
-        }).catch(() => {
-            setOutput("Invalid user or please verify your account....");
-            setEmail("");
-            setPassword("");
-        });
+        if (!email) {
+            newErrors.email = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            newErrors.email = "Invalid email format";
+        }
+
+        if (!password) {
+            newErrors.password = "Password is required";
+        } else if (password.length < 6) {
+            newErrors.password = "Password must be at least 6 characters";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
+    const handleSubmit = () => {
+        if (!validate()) {
+            toast.error("Please fix the errors");
+            return;
+        }
 
-    return (/* my-20px-10 */
-        <div id="login" className=" min-h-96 w-screen  ">
-            <div className="relative rounded-lg bg-black py-24 text-blue-50 sm:overflow-hidden">
-                <div className="absolute -left-20 top-0 hidden h-full w-72 overflow-hidden sm:block lg:left-20 lg:w-96">
-                    <ImageClipBox
-                        src="/img/contact-1.webp"
-                        clipClass="contact-clip-path-1"
+        const userDetails = { email, password };
+
+        axios.post(__userapiurl + "login", userDetails)
+            .then((response) => {
+                const users = response.data.info;
+
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("name", users.name);
+                localStorage.setItem("email", users.email);
+                localStorage.setItem("mobile", users.mobile);
+                localStorage.setItem("address", users.address);
+                localStorage.setItem("city", users.city);
+                localStorage.setItem("gender", users.gender);
+                localStorage.setItem("info", users.info);
+                localStorage.setItem("role", users.role);
+
+                toast.success("Login successful!");
+
+                if (users.role === "admin") navigate("/admin");
+                else if (users.role === "subadmin") navigate("/subadmin");
+                else navigate("/user");
+            })
+            .catch(() => {
+                toast.error("Invalid user or verify your account");
+                setEmail("");
+                setPassword("");
+            });
+    };
+
+    return (
+
+
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black">
+            <div className="flex w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+
+                {/* LEFT SIDE - IMAGE */}
+                <div className="w-1/2 hidden md:block relative">
+                    <img
+                        src="/img/about.webp"
+                        alt="login visual"
+                        className="h-full w-full object-cover"
                     />
-                    <ImageClipBox
-                        src="/img/contact-2.webp"
-                        clipClass="contact-clip-path-2 lg:translate-y-40 translate-y-60"
-                    />
+                    {/* Optional overlay for better contrast */}
+                    <div className="absolute inset-0 bg-black/30"></div>
                 </div>
 
-                <div className="absolute -top-40 left-20 w-60 sm:top-1/2 md:left-auto md:right-10 lg:top-20 lg:w-80">
-                    <ImageClipBox
-                        src="/img/swordman-partial.webp"
-                        clipClass="absolute md:scale-125"
-                    />
-                    <ImageClipBox
-                        src="/img/swordman.webp"
-                        clipClass="sword-man-clip-path md:scale-125"
-                    />
-                </div>
+                {/* RIGHT SIDE - GLASS LOGIN FORM */}
+                <div className="w-full md:w-1/2 flex items-center justify-center p-10 bg-white/5 backdrop-blur-xl">
 
-                <div className="w-full max-w-md mx-auto mt-20 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 shadow-xl text-white">
                     <form
-                        className="form-box"
                         onSubmit={(e) => {
                             e.preventDefault();
                             handleSubmit();
                         }}
+                        className="w-full max-w-sm space-y-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-8 shadow-lg"
                     >
+                        <h2 className="text-3xl font-semibold text-center text-white">
+                            Welcome Back
+                        </h2>
 
-                        <div className="form-group">
-                            <label>Email</label>
+                        {/* EMAIL */}
+                        <div>
+                            <label className="block mb-1 text-sm text-gray-300">Email</label>
                             <input
                                 type="email"
                                 value={email || ""}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="input-style"
+                                className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter your email"
                             />
+                            {errors.email && (
+                                <p className="text-red-400 text-sm mt-1">{errors.email}</p>
+                            )}
                         </div>
 
-                        <div className="form-group">
-                            <label>Password</label>
+                        {/* PASSWORD */}
+                        <div>
+                            <label className="block mb-1 text-sm text-gray-300">Password</label>
                             <input
                                 type="password"
                                 value={password || ""}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="input-style"
+                                className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter your password"
                             />
+                            {errors.password && (
+                                <p className="text-red-400 text-sm mt-1">{errors.password}</p>
+                            )}
                         </div>
-                        <Button onClick={handleSubmit} title="Login" containerClass="mt-10 cursor-pointer" />
+
+                        {/* FORGOT PASSWORD */}
+                        <div className="flex justify-end">
+                            <span
+                                onClick={() => navigate("/forgot-password")}
+                                className="text-sm text-blue-400 hover:underline cursor-pointer"
+                            >
+                                Forgot Password?
+                            </span>
+                        </div>
+
+                        {/* BUTTON */}
+                        <button
+                            type="submit"
+                            className="w-full py-2 rounded-md bg-blue-600/80 hover:bg-blue-600 transition backdrop-blur-md shadow-md"
+                        >
+                            Login
+                        </button>
                     </form>
-
                 </div>
-
             </div>
+
             <ToastContainer />
         </div>
     );

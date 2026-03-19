@@ -1,15 +1,16 @@
 {
-  "name": "30aug",
+  "name": "pawnstore",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec babel-node"
+    "dev": "node app.js",
+    "start": "nodemon --exec babel-node"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "this is my first app",
+  "description": "Welcome to Pawn store",
   "dependencies": {
     "@babel/core": "^7.28.3",
     "@babel/node": "^7.28.0",
@@ -22,7 +23,7 @@
     "express": "^5.2.1",
     "express-fileupload": "^1.5.2",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^7.0.0",
+    "mongoose": "^7.8.9",
     "mongoose-unique-validator": "^4.0.1",
     "nodemailer": "^8.0.1",
     "nodemon": "^3.1.14",

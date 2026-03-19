@@ -1,202 +1,263 @@
-import AnimatedTitle from "./AnimatedTitle";
-import Button from "./Button";
-import { useState } from 'react';
-import axios from 'axios';
-import { __userapiurl } from '../../src/API_URL';
-import './Register.css';
-import { ToastContainer, toast } from 'react-toastify';
-
-const ImageClipBox = ({ src, clipClass }) => (
-  <div className={clipClass}>
-    <img src={src} />
-  </div>
-);
+import { useState } from "react";
+import axios from "axios";
+import { __userapiurl } from "../../src/API_URL";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import "./Register.css";
 
 const Register = () => {
+  const navigate = useNavigate();
 
-  const [output, setOutput] = useState();
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [mobile, setMobile] = useState();
-  const [address, setAddress] = useState();
-  const [city, setCity] = useState();
-  const [gender, setGender] = useState();
-  const [role, setRole] = useState();
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    mobile: "",
+    address: "",
+    city: "",
+    gender: "",
+    role: "",
+  });
 
-  const handleSubmit = () => {
-    const userDetails = { name, "email": email, "password": password, "mobile": mobile, "address": address, "city": city, "gender": gender, role };
-    axios.post(__userapiurl + "save", userDetails).then(() => {
-      setOutput("User register successfully....");
-      setName("");
-      setPassword("");
-      setEmail("");
-      setMobile("");
-      setAddress("");
-      setCity("");
-      setGender("");
-      setRole("");
-      toast("User register successfully...");
-    }).catch(() => {
-      setOutput("User registration failed....");
-    });
+  const [errors, setErrors] = useState({});
 
+  // 🔹 Handle Change
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // 🔹 Validation
+  const validate = () => {
+    let err = {};
+
+    if (!form.name) err.name = "Name is required";
+
+    if (!form.email) err.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(form.email))
+      err.email = "Invalid email";
+
+    if (!form.password) err.password = "Password is required";
+    else if (form.password.length < 6)
+      err.password = "Min 6 characters required";
+
+    if (!form.mobile) err.mobile = "Mobile is required";
+    else if (!/^[6-9]\d{9}$/.test(form.mobile))
+      err.mobile = "Invalid mobile number";
+
+    if (!form.address) err.address = "Address required";
+
+    if (!form.city) err.city = "Select city";
+
+    if (!form.gender) err.gender = "Select gender";
+
+    if (!form.role) err.role = "Select role";
+
+    setErrors(err);
+    return Object.keys(err).length === 0;
+  };
+
+  // 🔹 Submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!validate()) {
+      toast.error("Please fix form errors");
+      return;
+    }
+
+    axios
+      .post(__userapiurl + "save", form)
+      .then(() => {
+        toast.success("Registration successful!");
+
+        setForm({
+          name: "",
+          email: "",
+          password: "",
+          mobile: "",
+          address: "",
+          city: "",
+          gender: "",
+          role: "",
+        });
+
+        navigate("/login");
+      })
+      .catch(() => {
+        toast.error("Registration failed");
+      });
+  };
 
   return (
-    <div id="register" className="min-h-96 w-screen">
-      <div className="relative rounded-lg bg-black py-24 text-blue-50 sm:overflow-hidden">
-        <div className="absolute -left-20 top-0 hidden h-full w-72 overflow-hidden sm:block lg:left-20 lg:w-96">
-          <ImageClipBox
-            src="/img/contact-1.webp"
-            clipClass="contact-clip-path-1"
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black">
+      <div className="flex w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+
+        {/* LEFT IMAGE */}
+        <div className="w-1/2 hidden md:block relative">
+          <img
+            src="/img/about.webp"
+            alt="register"
+            className="h-full w-full object-cover"
           />
-          <ImageClipBox
-            src="/img/contact-2.webp"
-            clipClass="contact-clip-path-2 lg:translate-y-40 translate-y-60"
-          />
+          <div className="absolute inset-0 bg-black/40"></div>
         </div>
 
-        <div className="absolute -top-40 left-20 w-60 sm:top-1/2 md:left-auto md:right-10 lg:top-20 lg:w-80">
-          <ImageClipBox
-            src="/img/swordman-partial.webp"
-            clipClass="absolute md:scale-125"
-          />
-          <ImageClipBox
-            src="/img/swordman.webp"
-            clipClass="sword-man-clip-path md:scale-125"
-          />
-        </div>
+        {/* RIGHT FORM */}
+        <div className="w-full md:w-1/2 flex items-center justify-center p-8 bg-white/5 backdrop-blur-xl">
 
-        <div className="flex flex-col items-center text-center">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-md space-y-4 glass-box text-white"
+          >
+            <h2 className="text-2xl font-semibold text-center">
+              Create Account
+            </h2>
 
-          <div className="form-container w-full max-w-lg">
-            <form className="form-box bg-black/60 backdrop-blur-md p-8 rounded-xl border border-white/10 shadow-xl space-y-5">
+            {/* NAME */}
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                value={form.name}
+                onChange={handleChange}
+                className="input-style text-field mb-0"
+              />
+              <p className="error">{errors.name}</p>
+            </div>
 
-              <div className="flex flex-col text-left">
-                <label className="mb-1 text-sm">Name</label>
-                <input
-                  type="text"
-                  value={name || ""}
-                  onChange={e => setName(e.target.value)}
-                  className="input-style mb-0"
-                />
+            {/* EMAIL */}
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+                className="input-style"
+              />
+              <p className="error">{errors.email}</p>
+            </div>
+
+            {/* PASSWORD */}
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={form.password}
+                onChange={handleChange}
+                className="input-style"
+              />
+              <p className="error">{errors.password}</p>
+            </div>
+
+            {/* MOBILE */}
+            <div>
+              <input
+                type="text"
+                name="mobile"
+                placeholder="Mobile"
+                value={form.mobile}
+                onChange={handleChange}
+                className="input-style text-field mb-0"
+              />
+              <p className="error">{errors.mobile}</p>
+            </div>
+
+            {/* ADDRESS */}
+            <div>
+              <textarea
+                name="address"
+                placeholder="Address"
+                value={form.address}
+                onChange={handleChange}
+                className="input-style resize-none h-20"
+              />
+              <p className="error">{errors.address}</p>
+            </div>
+
+            {/* CITY */}
+            <div>
+              <select
+                name="city"
+                value={form.city}
+                onChange={handleChange}
+                className="input-style"
+              >
+                <option value="">Select City</option>
+                <option>Indore</option>
+                <option>Bhopal</option>
+                <option>Ujjain</option>
+              </select>
+              <p className="error">{errors.city}</p>
+            </div>
+
+            {/* GENDER */}
+            <div>
+              <label className="label">Gender</label>
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    checked={form.gender === "male"}
+                    onChange={handleChange}
+                  />
+                  &nbsp; Male
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="female"
+                    checked={form.gender === "female"}
+                    onChange={handleChange}
+                  />
+                  &nbsp;  Female
+                </label>
               </div>
+              <p className="error">{errors.gender}</p>
+            </div>
 
-              <div className="flex flex-col text-left">
-                <label className="mb-1 text-sm">Email</label>
-                <input
-                  type="email"
-                  value={email || ""}
-                  onChange={e => setEmail(e.target.value)}
-                  className="input-style"
-                />
+            {/* ROLE */}
+            <div>
+              <label className="label">Select Role</label>
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="user"
+                    checked={form.role === "user"}
+                    onChange={handleChange}
+                  />
+                  &nbsp;   User
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="subadmin"
+                    checked={form.role === "subadmin"}
+                    onChange={handleChange}
+                  />
+                  &nbsp;    Member
+                </label>
               </div>
+              <p className="error">{errors.role}</p>
+            </div>
 
-              <div className="flex flex-col text-left">
-                <label className="mb-1 text-sm">Password</label>
-                <input
-                  type="password"
-                  value={password || ""}
-                  onChange={e => setPassword(e.target.value)}
-                  className="input-style"
-                />
-              </div>
+            {/* BUTTON */}
+            <button className="btn-primary">Register</button>
 
-              <div className="flex flex-col text-left">
-                <label className="mb-1 text-sm">Mobile</label>
-                <input
-                  type="text"
-                  value={mobile || ""}
-                  onChange={e => setMobile(e.target.value)}
-                  className="input-style mb-0"
-                />
-              </div>
-
-              <div className="flex flex-col text-left">
-                <label className="mb-1 text-sm">Address</label>
-                <textarea
-                  value={address || ""}
-                  onChange={e => setAddress(e.target.value)}
-                  className="input-style resize-none h-20"
-                />
-              </div>
-
-              <div className="flex flex-col text-left">
-                <label className="mb-1 text-sm">City</label>
-                <select
-                  value={city || ""}
-                  onChange={e => setCity(e.target.value)}
-                  className="input-style"
-                >
-                  <option value="">Select City</option>
-                  <option>Indore</option>
-                  <option>Bhopal</option>
-                  <option>Ujjain</option>
-                </select>
-              </div>
-
-              <div className="flex flex-col text-left">
-                <label className="mb-2 text-sm">Gender</label>
-                <div className="flex gap-6">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="male"
-                      checked={gender === "male"}
-                      onChange={e => setGender(e.target.value)}
-                    />
-                    Male
-                  </label>
-
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="female"
-                      checked={gender === "female"}
-                      onChange={e => setGender(e.target.value)}
-                    />
-                    Female
-                  </label>
-                </div>
-              </div>
-
-              <div className="flex flex-col text-left">
-                <label className="mb-2 text-sm">Select Role</label>
-                <div className="flex gap-6">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="role"
-                      value="user"
-                      checked={role === "user"}
-                      onChange={e => setRole(e.target.value)}
-                    />
-                    User
-                  </label>
-
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="role"
-                      value="subadmin"
-                      checked={role === "subadmin"}
-                      onChange={e => setRole(e.target.value)}
-                    />
-                    Member
-                  </label>
-                </div>
-              </div>
-
-            </form>
-          <Button onClick={handleSubmit} title="Submit" containerClass="mb-4 cursor-pointer" />
-
-          </div>
+          </form>
         </div>
       </div>
+
       <ToastContainer />
     </div>
   );
