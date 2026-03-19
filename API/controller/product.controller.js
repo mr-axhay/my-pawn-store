@@ -2,7 +2,7 @@ import "../models/connection.js";
 import url from 'url';
 import path from 'path';
 import rs from 'randomstring';
-
+import sendWhatsAppMessage from "../utils/twilio.js";
 //to link product model
 import ProductSchemaModel from "../models/product.model.js";
 
@@ -22,6 +22,12 @@ export const save = async (req, res) => {
     await ProductSchemaModel.create(pDetails);
 
     caticon.mv(uploadfilepath);
+    // Send WhatsApp alert- commented as it will reduce the balance but it works!
+    // await sendWhatsAppMessage(
+    //   "+917746830045", // user/admin number
+    //   `🛒 New Product Added!\n\nName: ${pDetails.catnm}`
+    // );
+
     res.status(201).json({ "status": true });
   }
   catch {
@@ -31,8 +37,8 @@ export const save = async (req, res) => {
 
 export const fetch = async (req, res) => {
   var condition_obj = req.query;
-  console.log("condition_obj",condition_obj);
-  
+  console.log("condition_obj", condition_obj);
+
   var pList = await ProductSchemaModel.find(condition_obj);
   if (pList.length != 0)
     res.status(200).json({ "status": true, "info": pList });
@@ -46,7 +52,7 @@ export var deleteUser = async (req, res) => {
     let pDetails = await ProductSchemaModel.findOne(JSON.parse(req.body.condition_obj));
     if (pDetails) {
       let product = await ProductSchemaModel.deleteOne(JSON.parse(req.body.condition_obj));
-      var pList = await ProductSchemaModel.find();      
+      var pList = await ProductSchemaModel.find();
       if (pList.length != 0)
         res.status(200).json({ "status": true, "info": pList });
       else
@@ -60,7 +66,7 @@ export var deleteUser = async (req, res) => {
 };
 
 export var update = async (req, res) => {
-  try {    
+  try {
     let pDetails = await ProductSchemaModel.findOne(JSON.parse(req.body.condition_obj));
     if (pDetails) {
       let product = await ProductSchemaModel.updateOne(JSON.parse(req.body.condition_obj), { $set: JSON.parse(req.body.content_obj) });
