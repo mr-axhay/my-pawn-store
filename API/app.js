@@ -9,9 +9,9 @@ import CategoryRouter from './routes/category.router.js';
 import SubCategoryRouter from './routes/subcategory.js';
 import ForgetPassword from './controller/fp.controller.js';
 import ProductRouter from './routes/product.router.js';
-import chatRouter from "./routes/chat.router.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import evaluateRoutes from "./routes/evaluate.js";
+import ChatRouter from './routes/chat.router.js';
 
 const razorpayInstance = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 
 //route level middleware
-app.use("/chat", chatRouter);
+app.use("/chat", ChatRouter);
 app.use("/user", UserRouter);
 app.use("/category", CategoryRouter);
 app.use("/subcategory", SubCategoryRouter);
