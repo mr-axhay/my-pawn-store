@@ -2,3 +2,20 @@
 /* background-color: black; */
 background: linear-gradient(135deg, #000000, #1f2937);
 }
+
+@media (min-width:768px) {
+   .nav-menu{
+    overflow-x: auto;
+   } 
+}
+
+
+.nav-menu{
+     width: 80%;
+}
+
+@media (max-width:767px) {
+   .nav-menu{
+    justify-content: end;
+   } 
+}
