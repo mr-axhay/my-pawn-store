@@ -56,7 +56,7 @@ function App() {
           <Route path='/expertDashboard' element={<ExpertDashboard />} ></Route>
           <Route path='/orders' element={<Orders />} ></Route>
           <Route path='/forgot-password' element={<ForgotPassword />} ></Route>
-          <Route path='/reset-password/:email' element={<ResetPassword />} ></Route>
+          <Route path='https://my-pawn-store-fe.onrender.com/reset-password/:email' element={<ResetPassword />} ></Route>
 
         </Routes>
       </div>
