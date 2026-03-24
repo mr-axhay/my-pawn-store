@@ -17,30 +17,35 @@ const Orders = () => {
   return (
     <div className="orders">
       <h1>My Orders</h1>
+      {orders.length > 0 ? (
+        <div className="orders-grid">
+          {orders.map((order) => (
+            <div className="order-card" key={order._id}>
+              <img
+                src={`../../public/assets/uploads/caticons/${order.image}`}
+              />
 
-      <div className="orders-grid">
-        {orders.map((order) => (
-          <div className="order-card" key={order._id}>
-            <img src={`../../public/assets/uploads/caticons/${order.image}`} />
+              <div className="order-content">
+                <h3>{order.productName}</h3>
 
-            <div className="order-content">
-              <h3>{order.productName}</h3>
+                <p className="order-price">₹ {order.price}</p>
 
-              <p className="order-price">₹ {order.price}</p>
+                <p className="order-date">
+                  {new Date(order.createdAt).toLocaleDateString()}
+                </p>
 
-              <p className="order-date">
-                {new Date(order.createdAt).toLocaleDateString()}
-              </p>
+                <span className="order-status">SUCCESS</span>
+              </div>
 
-              <span className="order-status">SUCCESS</span>
+              <button onClick={() => setSelectedOrder(order)}>
+                View Invoice
+              </button>
             </div>
-
-            <button onClick={() => setSelectedOrder(order)}>
-              View Invoice
-            </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <h2>No Orders Found </h2>
+      )}
       {selectedOrder && (
         <div className="invoice-overlay">
           <div className="invoice-modal">

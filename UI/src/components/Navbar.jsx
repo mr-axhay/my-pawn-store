@@ -34,6 +34,7 @@ const NavBar = () => {
 
   const isAuthed = !!localStorage.getItem("token");
   const isAdmin = localStorage.getItem("role") === "admin";
+  
 
   useEffect(() => {
     if (isAudioPlaying) {
@@ -160,9 +161,13 @@ const NavBar = () => {
                         <NavLink to="/products" className="nav-hover-btn">
                           Products
                         </NavLink>
+                        <NavLink to="/orders" className="nav-hover-btn">
+                          Orders
+                        </NavLink>
                         <NavLink to="/myProducts" className="nav-hover-btn">
                           My Products
                         </NavLink>
+
                       </>
                     )}
                     <NavLink to="/logout" className="nav-hover-btn">
