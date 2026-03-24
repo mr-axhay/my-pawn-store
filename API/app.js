@@ -35,6 +35,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 
 //route level middleware
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
+});
 app.use("/chat", ChatRouter);
 app.use("/user", UserRouter);
 app.use("/category", CategoryRouter);
