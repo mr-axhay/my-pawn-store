@@ -14,7 +14,30 @@ const ProductSchema = mongoose.Schema({
     type: String,
     required: [true,"Product icon name is required"],
     trim: true
-  }
+  },
+   catId: {
+    type: Number,
+    required: [true,"Product category id is required"],
+    trim: true
+  },
+   userId: {
+    type: String,
+    required: [true,"UserId is required"],
+    lowercase: true,
+    trim: true
+  },
+  price: {
+    type: Number,
+    required: [true,"Price is required"],
+    lowercase: true,
+    trim: true
+  },
+  description: {
+    type: String,
+    required: [true,"Description is required"],
+    lowercase: true,
+    trim: true
+  },
 });
 
 //Apply the uniqueValidator plugin to CategorySchema.

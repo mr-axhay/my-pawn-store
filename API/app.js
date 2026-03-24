@@ -12,6 +12,7 @@ import ProductRouter from './routes/product.router.js';
 import paymentRoutes from "./routes/payment.routes.js";
 import evaluateRoutes from "./routes/evaluate.js";
 import ChatRouter from './routes/chat.router.js';
+import OrderRouter from './routes/order.router.js';
 import connectDB from "./config/db.js";
 // import whatsappRoutes from "./routes/whatsapp.js";
 const razorpayInstance = new Razorpay({
@@ -47,6 +48,7 @@ app.post("/forgetpassword", ForgetPassword);
 app.use("/api/payment", paymentRoutes);
 app.use("/product", ProductRouter);
 app.use("/api/evaluate", evaluateRoutes);
+app.use("/api/order", OrderRouter);
 // app.use("/webhook", whatsappRoutes);
 // import express from "express";
 // import mongoose from "mongoose";

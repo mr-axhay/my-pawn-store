@@ -8,15 +8,15 @@ import Button from "./Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
-const navItems = ["Services", "Products", "About", "Contact"];
+const navItems = ["About", "Contact"];
 
 const NavBar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);           // <-- ADD
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // <-- ADD
 
   const audioElementRef = useRef(null);
-  const navContainerRef = useRef(null);                          // <-- keep as-is
+  const navContainerRef = useRef(null); // <-- keep as-is
   const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -29,7 +29,7 @@ const NavBar = () => {
 
   const handlePayment = () => {
     navigate("/pay");
-    setIsMenuOpen(false);                                        // close drawer after nav
+    setIsMenuOpen(false); // close drawer after nav
   };
 
   const isAuthed = !!localStorage.getItem("token");
@@ -123,13 +123,20 @@ const NavBar = () => {
               {/* Desktop menu */}
               <div className="hidden md:block">
                 {navItems.map((item, index) => (
-                  <a key={index} href={`#${item.toLowerCase()}`} className="nav-hover-btn">
+                  <a
+                    key={index}
+                    href={`#${item.toLowerCase()}`}
+                    className="nav-hover-btn"
+                  >
                     {item}
                   </a>
                 ))}
 
                 {!isAuthed ? (
                   <>
+                    <NavLink to="/products" className="nav-hover-btn">
+                      Products
+                    </NavLink>
                     <NavLink to="/login" className="nav-hover-btn">
                       Login
                     </NavLink>
@@ -149,9 +156,14 @@ const NavBar = () => {
                         </NavLink>
                       </>
                     ) : (
-                      <NavLink to="/product" className="nav-hover-btn">
-                        Product
-                      </NavLink>
+                      <>
+                        <NavLink to="/products" className="nav-hover-btn">
+                          Products
+                        </NavLink>
+                        <NavLink to="/myProducts" className="nav-hover-btn">
+                          My Products
+                        </NavLink>
+                      </>
                     )}
                     <NavLink to="/logout" className="nav-hover-btn">
                       Logout
@@ -163,18 +175,20 @@ const NavBar = () => {
               {/* Audio indicator */}
               <button
                 onClick={toggleAudioIndicator}
-              className="ml-10 flex items-center space-x-0.5"
+                className="ml-10 flex items-center space-x-0.5"
               >
-              <audio
-                ref={audioElementRef}
-                className="hidden"
-                src="/audio/loop.mp3"
-                loop
-              />
+                <audio
+                  ref={audioElementRef}
+                  className="hidden"
+                  src="/audio/loop.mp3"
+                  loop
+                />
                 {[1, 2, 3, 4].map((bar) => (
                   <div
                     key={bar}
-                    className={clsx("indicator-line", { active: isIndicatorActive })}
+                    className={clsx("indicator-line", {
+                      active: isIndicatorActive,
+                    })}
                     style={{ animationDelay: `${bar * 0.1}s` }}
                   />
                 ))}
@@ -202,7 +216,9 @@ const NavBar = () => {
       <div
         className={clsx(
           "fixed inset-0 z-[9998] bg-black/40 transition-opacity md:hidden",
-          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
         )}
         onClick={closeMenu}
         aria-hidden="true"
@@ -213,7 +229,7 @@ const NavBar = () => {
         className={clsx(
           "fixed top-0 right-0 z-[9999] h-screen w-4/5 max-w-sm bg-black shadow-2xl md:hidden",
           "transform transition-transform duration-300 ease-out",
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
+          isMenuOpen ? "translate-x-0" : "translate-x-full",
         )}
         role="dialog"
         aria-modal="true"
@@ -261,10 +277,18 @@ const NavBar = () => {
 
           {!isAuthed ? (
             <>
-              <NavLink to="/login" className="nav-hover-btn py-2" onClick={closeMenu}>
+              <NavLink
+                to="/login"
+                className="nav-hover-btn py-2"
+                onClick={closeMenu}
+              >
                 Login
               </NavLink>
-              <NavLink to="/register" className="nav-hover-btn py-2" onClick={closeMenu}>
+              <NavLink
+                to="/register"
+                className="nav-hover-btn py-2"
+                onClick={closeMenu}
+              >
                 Register
               </NavLink>
             </>
@@ -272,19 +296,43 @@ const NavBar = () => {
             <>
               {isAdmin ? (
                 <>
-                  <NavLink to="/manageUsers" className="nav-hover-btn py-2" onClick={closeMenu}>
+                  <NavLink to="/products" className="nav-hover-btn">
+                    Products
+                  </NavLink>
+                  <NavLink
+                    to="/manageUsers"
+                    className="nav-hover-btn py-2"
+                    onClick={closeMenu}
+                  >
                     Manage users
                   </NavLink>
-                  <NavLink to="/categories" className="nav-hover-btn py-2" onClick={closeMenu}>
+                  <NavLink
+                    to="/categories"
+                    className="nav-hover-btn py-2"
+                    onClick={closeMenu}
+                  >
                     Manage Categories
                   </NavLink>
                 </>
               ) : (
-                <NavLink to="/product" className="nav-hover-btn py-2" onClick={closeMenu}>
-                  Product
-                </NavLink>
+                <>
+                  <NavLink to="/products" className="nav-hover-btn">
+                    Products
+                  </NavLink>
+                  <NavLink
+                    to="/myProducts"
+                    className="nav-hover-btn py-2"
+                    onClick={closeMenu}
+                  >
+                    My Products
+                  </NavLink>
+                </>
               )}
-              <NavLink to="/logout" className="nav-hover-btn py-2" onClick={closeMenu}>
+              <NavLink
+                to="/logout"
+                className="nav-hover-btn py-2"
+                onClick={closeMenu}
+              >
                 Logout
               </NavLink>
             </>

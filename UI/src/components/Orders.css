@@ -1,0 +1,205 @@
+/* Page Layout */
+.orders {
+    min-height: 100vh;
+    padding: 50px 80px;
+    background: linear-gradient(135deg, #000000, #1f2937);
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+
+/* Heading */
+.orders h1 {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+/* Grid */
+.orders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 35px;
+}
+
+/* Card */
+.order-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 20px;
+    transition: 0.4s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Hover */
+.order-card:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(255, 126, 95, 0.2);
+}
+
+/* Image */
+.order-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 18px;
+    margin-bottom: 15px;
+}
+
+/* Content */
+.order-content {
+    text-align: center;
+}
+
+/* Title */
+.order-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Price */
+.order-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ffd166;
+}
+
+/* Date */
+.order-date {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-bottom: 12px;
+}
+
+/* Status Badge */
+.order-status {
+    display: inline-block;
+    background: rgba(0, 255, 136, 0.2);
+    color: #00ff88;
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-bottom: 15px;
+}
+
+/* Button */
+.order-card button {
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #000000, #1f2937);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+/* Button Hover */
+.order-card button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #000000, #1f2937);
+}
+
+/* Overlay */
+.invoice-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* Modal */
+.invoice-modal {
+  background: white;
+  color: black;
+  padding: 30px;
+  border-radius: 20px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Heading */
+.invoice-modal h1 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Divider */
+.invoice-modal hr {
+  margin: 15px 0;
+}
+
+/* Buttons */
+.invoice-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.invoice-actions button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.invoice-actions button:first-child {
+  background: #4caf50;
+  color: white;
+}
+
+.invoice-actions button:last-child {
+  background: #f44336;
+  color: white;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* PRINT ONLY INVOICE */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .invoice-modal, .invoice-modal * {
+    visibility: visible;
+  }
+
+  .invoice-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .invoice-actions {
+    display: none;
+  }
+}

@@ -1,6 +1,5 @@
 import NavBar from "./components/Navbar";
 import Home from "./components/Home";
-import Footer from "./components/Footer";
 import { Routes, Route } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -20,6 +19,8 @@ import { useLocation } from "react-router-dom";
 import SubAdminHomePage from "./components/SubAdminHomePage";
 import ExpertDashboard from "./components/ExpertDashboard";
 import OpenAIChat from "./components/OpenAIChat";
+import AllProducts from "./components/AllProducts";
+import Orders from "./components/Orders";
 
 
 
@@ -45,12 +46,14 @@ function App() {
           <Route path='/addSubCategory/:name' element={<AddSubCategory />} ></Route>
           <Route path='/pay' element={<PaymentButton />} ></Route>
           <Route path='/userHome' element={<UserHome />} ></Route>
+          <Route path='/products' element={<AllProducts />} ></Route>
           <Route path='/addProduct' element={<AddProduct />} ></Route>
-          <Route path='/product' element={<Product />} ></Route>
+          <Route path='/myProducts' element={<Product />} ></Route>
           <Route path='/viewProduct/:id' element={<ViewProduct />} ></Route>
           <Route path='/editProduct/:id' element={<AddProduct />} ></Route>
           <Route path='/subadmin' element={<SubAdminHomePage />} ></Route>
           <Route path='/expertDashboard' element={<ExpertDashboard />} ></Route>
+          <Route path='/orders' element={<Orders />} ></Route>
 
 
         </Routes>
