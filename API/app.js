@@ -12,13 +12,15 @@ import ProductRouter from './routes/product.router.js';
 import paymentRoutes from "./routes/payment.routes.js";
 import evaluateRoutes from "./routes/evaluate.js";
 import ChatRouter from './routes/chat.router.js';
-
+import connectDB from "./config/db.js";
+// import whatsappRoutes from "./routes/whatsapp.js";
 const razorpayInstance = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
     key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
 const app = express();
+
 
 
 //to handle cross origin request
@@ -42,7 +44,29 @@ app.post("/forgetpassword", ForgetPassword);
 app.use("/api/payment", paymentRoutes);
 app.use("/product", ProductRouter);
 app.use("/api/evaluate", evaluateRoutes);
+// app.use("/webhook", whatsappRoutes);
+// import express from "express";
+// import mongoose from "mongoose";
+// import dotenv from "dotenv";
+
+// dotenv.config(); // ✅ FIX your error (you forgot import)
+
+// // Connect DB
+// mongoose.connect(process.env.MONGO_URI)
+// .then(() => console.log("✅ MongoDB Connected"))
+// .catch(err => console.log("❌ Error:", err));
+
+// // Test route
+// app.get("/", (req, res) => {
+//   res.send("API Running");
+// });
+
+// app.listen(process.env.PORT, () 
+// });=> {
+//   console.log(`Server running on port ${process.env.PORT}`);
+// app.use("/api/ollamaChat", ollamaChat);
 app.listen(3001);
+connectDB();
 console.log("Server invoked at link http://localhost:3001");
 
 
