@@ -21,7 +21,8 @@ import ExpertDashboard from "./components/ExpertDashboard";
 import OpenAIChat from "./components/OpenAIChat";
 import AllProducts from "./components/AllProducts";
 import Orders from "./components/Orders";
-
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 
 function App() {
@@ -54,7 +55,8 @@ function App() {
           <Route path='/subadmin' element={<SubAdminHomePage />} ></Route>
           <Route path='/expertDashboard' element={<ExpertDashboard />} ></Route>
           <Route path='/orders' element={<Orders />} ></Route>
-
+          <Route path='/forgot-password' element={<ForgotPassword />} ></Route>
+          <Route path='/reset-password/:email' element={<ResetPassword />} ></Route>
 
         </Routes>
       </div>
