@@ -14,7 +14,13 @@ const ForgetPassword = (req, res) => {
     from: 'vilekhofficial@gmail.com',
     to: email,
     subject: 'Link For ForgetPassword PawnShop',
-    html: "<h1>Welcome to pawnshop</h1><h2>your link to reset password is attached below</h2><h2>Click on the link below to reset password</h2><a href='https://my-pawn-store-fe.onrender.com/reset-password/" + email + "'>Click to reset password</a>"
+    html: `
+  <h1>Welcome to pawnshop</h1>
+  <h2>Click below to reset password</h2>
+  <a href='${process.env.FRONTEND_URL}/reset-password/${email}'>
+    Click to reset password
+  </a>
+`
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
