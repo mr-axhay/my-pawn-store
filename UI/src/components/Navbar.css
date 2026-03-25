@@ -19,3 +19,9 @@ background: linear-gradient(135deg, #000000, #1f2937);
     justify-content: end;
    } 
 }
+
+@media (min-width:850px) {
+   .nav-menu{
+    justify-content: flex-end;
+   } 
+}

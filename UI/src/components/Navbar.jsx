@@ -92,7 +92,7 @@ const NavBar = () => {
             {/* Left: logo + quick buttons */}
             <div className="flex items-center gap-3 md:gap-7">
               <img
-                src="/img/logo.png"
+                src="/img/psLogo.jpg"
                 alt="logo"
                 className="w-10 cursor-pointer"
                 onClick={() => {
@@ -101,16 +101,6 @@ const NavBar = () => {
                 }}
               />
 
-              <Button
-                id="product-button"
-                title="AI-Companion"
-                rightIcon={<TiLocationArrow />}
-                onClick={() => {
-                  navigate("/chat");
-                  closeMenu();
-                }}
-                containerClass="bg-blue-50 flex items-center justify-center gap-1"
-              />
               <Button
                 id="charity-button"
                 title="Charity"
@@ -344,16 +334,6 @@ const NavBar = () => {
           )}
 
           <div className="mt-auto flex gap-2">
-            <Button
-              id="drawer-ai"
-              title="AI-Companion"
-              rightIcon={<TiLocationArrow />}
-              onClick={() => {
-                navigate("/chat");
-                closeMenu();
-              }}
-              containerClass="bg-blue-50 flex items-center justify-center gap-1 w-full"
-            />
             <Button
               id="drawer-charity"
               title="Charity"

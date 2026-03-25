@@ -60,7 +60,7 @@ const Login = () => {
 
                 if (users.role === "admin") navigate("/admin");
                 else if (users.role === "subadmin") navigate("/subadmin");
-                else navigate("/user");
+                else navigate("/userHome");
             })
             .catch(() => {
                 toast.error("Invalid user or verify your account");
@@ -78,7 +78,7 @@ const Login = () => {
                 {/* LEFT SIDE - IMAGE */}
                 <div className="w-1/2 hidden md:block relative">
                     <img
-                        src="/img/about.webp"
+                        src="/img/login.webp"
                         alt="login visual"
                         className="h-full w-full object-cover"
                     />
