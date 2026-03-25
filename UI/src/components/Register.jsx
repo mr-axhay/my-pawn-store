@@ -95,11 +95,11 @@ const Register = () => {
         {/* LEFT IMAGE */}
         <div className="w-1/2 hidden md:block relative">
           <img
-            src="/img/about.webp"
+            src="/img/register.avif"
             alt="register"
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0"></div>
         </div>
 
         {/* RIGHT FORM */}

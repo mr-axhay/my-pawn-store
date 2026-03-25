@@ -46,8 +46,12 @@ const ViewProduct = () => {
       });
 
       setMessage("✅ Evaluation request sent to experts!");
+      setProductDetail({
+        ...productDetail,
+        status: "pending",
+      });
     } catch (err) {
-      setMessage("❌ Failed to send request",err);
+      setMessage("❌ Failed to send request", err);
     }
   };
   const buyProduct = async () => {
@@ -200,14 +204,13 @@ const ViewProduct = () => {
                     : "Evaluate"}
                 </button>
               ) : (
-                <p>Your Evaluation request is {productDetail.status}</p>
+                <>
+                <div className="mt-4 bg-black/30 p-3 rounded-xl">
+                  <p>Your Evaluation request is {productDetail.status}</p>
+                </div>
+                </>
               ))}
           </div>
-
-          {/* Message */}
-          {message && (
-            <div className="mt-4 bg-black/30 p-3 rounded-xl">{message}</div>
-          )}
 
           {/* Extra */}
           <div className="mt-6 text-sm">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ExpertDashboard = () => {
@@ -66,7 +66,7 @@ const ExpertDashboard = () => {
             </div>
 
             {/* RIGHT BUTTONS */}
-            <div className="flex gap-4 mt-4 md:mt-0">
+            {  (req.status === "pending") &&<div className="flex gap-4 mt-4 md:mt-0">
               <button
                 onClick={() => handleApprove(req._id)}
                 className="bg-green-500 px-5 py-2 rounded-xl hover:bg-green-600 transition"
@@ -81,6 +81,7 @@ const ExpertDashboard = () => {
                 Reject
               </button>
             </div>
+}
           </div>
         ))}
       </div>
