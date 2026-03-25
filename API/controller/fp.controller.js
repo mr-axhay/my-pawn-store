@@ -5,11 +5,10 @@ const ForgetPassword = (req, res) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-       user: "mr.axhay@gmail.com",
+      user: "mr.axhay@gmail.com",
       pass: "ebacuoxshelpbvkr",
     },
   });
-  console.log("ENV-----:", process.env.FRONTEND_URL);
   let mailOptions = {
     from: "mr.axhay@gmail.com",
     to: email,
@@ -17,14 +16,14 @@ const ForgetPassword = (req, res) => {
     html: `
   <h1>Welcome to Pawn Shop</h1>
   <h2>Click below to Reset Password</h2>
-  <a href='${process.env.FRONTEND_URL}/reset-password/${email}'>
+  <a href='${process.env.FRONTEND_URL}/reset-password/${encodeURIComponent(email)}'>
     Click to reset password
   </a>
 `,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
-  console.log("ENV-----:", process.env.FRONTEND_URL);
+
     if (error) {
       console.log(error);
     } else {
