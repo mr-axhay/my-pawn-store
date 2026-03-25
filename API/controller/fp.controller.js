@@ -9,7 +9,7 @@ const ForgetPassword = (req, res) => {
       pass: "rspuvrpysujwcekx",
     },
   });
-console.log("ENV-----:", process.env.FRONTEND_URL);
+  console.log("ENV-----:", process.env.FRONTEND_URL);
   let mailOptions = {
     from: "i.axhay7@gmail.com",
     to: email,
@@ -24,6 +24,7 @@ console.log("ENV-----:", process.env.FRONTEND_URL);
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
+  console.log("ENV-----:", process.env.FRONTEND_URL);
     if (error) {
       console.log(error);
     } else {
