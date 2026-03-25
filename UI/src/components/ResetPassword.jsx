@@ -1,5 +1,3 @@
-import AnimatedTitle from "./AnimatedTitle";
-import Button from "./Button";
 import { useState } from 'react';
 import axios from 'axios';
 import { __userapiurl } from '../API_URL';
@@ -13,7 +11,8 @@ const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const {email} = useParams();
-    console.log(email)
+    const decodedEmail = decodeURIComponent(email);
+    console.log(decodedEmail)
     const [errors, setErrors] = useState({});
 
     const validate = () => {
@@ -47,7 +46,7 @@ const ResetPassword = () => {
             return;
         }
 
-        const userDetails = { email, password :newPassword};
+        const userDetails = { decodedEmail, password :newPassword};
 
         axios.post(__userapiurl + "resetPassword", userDetails)
             .then((response) => {
@@ -59,8 +58,8 @@ const ResetPassword = () => {
             })
             .catch(() => {
                 toast.error("Invalid user or verify your account");
-                setEmail("");
-                setPassword("");
+                // setEmail("");
+                // setPassword("");
             });
     };
 

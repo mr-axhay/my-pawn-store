@@ -155,6 +155,7 @@ const Hero = () => {
               title="Watch Episodes"
               leftIcon={<TiLocationArrow />}
               containerClass="bg-yellow-300 flex-center gap-1"
+               onClick={() => window.open("https://www.youtube.com/@PawnStars", "_blank")}
             />
           </div>
         </div>
