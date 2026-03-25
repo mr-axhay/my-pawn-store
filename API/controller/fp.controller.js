@@ -9,7 +9,7 @@ const ForgetPassword = (req, res) => {
       pass: "rspuvrpysujwcekx",
     },
   });
-
+console.log("ENV-----:", process.env.FRONTEND_URL);
   let mailOptions = {
     from: "i.axhay7@gmail.com",
     to: email,
