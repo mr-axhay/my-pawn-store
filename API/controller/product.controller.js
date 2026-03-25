@@ -22,7 +22,12 @@ export const save = async (req, res) => {
     caticonnm,
   );
 
-  const pDetails = { ...req.body, caticonnm: caticonnm, _id: _id };
+  const pDetails = {
+    ...req.body,
+    caticonnm: caticonnm,
+    _id: _id,
+    status: "In stock",
+  };
   try {
     await ProductSchemaModel.create(pDetails);
 
@@ -41,7 +46,10 @@ export const save = async (req, res) => {
 
 export const fetch = async (req, res) => {
   try {
-    const condition_obj = req.query;
+    const condition_obj = {
+      ...req.query,
+      status: "In stock",
+    };
     console.log("condition_obj", condition_obj);
 
     // ✅ Fetch products
@@ -63,13 +71,12 @@ export const fetch = async (req, res) => {
 
     // ✅ Send updated data
     res.status(200).json({ status: true, info: finalData });
-
   } catch (err) {
     console.log(err);
     res.status(500).json({ status: false });
   }
 };
-export var deleteUser = async (req, res) => {
+export var deleteProduct = async (req, res) => {
   const condition = JSON.parse(req.body.condition_obj);
   const { userId } = condition;
   try {
@@ -89,7 +96,7 @@ export var deleteUser = async (req, res) => {
     res.status(500).json({ status: false });
   }
 };
-
+//check for status here
 export var update = async (req, res) => {
   try {
     let pDetails = await ProductSchemaModel.findOne(

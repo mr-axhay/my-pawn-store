@@ -1,5 +1,6 @@
 import express from "express";
 import Order from "../models/order.js";
+import ProductSchemaModel from "../models/product.model.js";
 
 const router = express.Router();
 
@@ -8,6 +9,10 @@ router.post("/save", async (req, res) => {
   try {
     const order = new Order(req.body);
     await order.save();
+    await ProductSchemaModel.findByIdAndUpdate(
+      req.body.productId,
+      { status: "sold out" }
+    );
 
     res.json({ success: true, message: "Order saved" });
   } catch (err) {

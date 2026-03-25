@@ -9,7 +9,7 @@ router.post("/save",ProductController.save);
 
 router.get("/fetch",ProductController.fetch);
 
-router.delete("/delete",ProductController.deleteUser);
+router.delete("/delete",ProductController.deleteProduct);
 
 router.patch("/update",ProductController.update);
 

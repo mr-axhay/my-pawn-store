@@ -38,6 +38,9 @@ const ProductSchema = mongoose.Schema({
     lowercase: true,
     trim: true
   },
+   status: {
+    type: String
+  },
 });
 
 //Apply the uniqueValidator plugin to CategorySchema.

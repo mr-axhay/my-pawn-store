@@ -83,7 +83,7 @@ const Login = () => {
                         className="h-full w-full object-cover"
                     />
                     {/* Optional overlay for better contrast */}
-                    <div className="absolute inset-0 bg-black/30"></div>
+                    <div className="absolute inset-0"></div>
                 </div>
 
                 {/* RIGHT SIDE - GLASS LOGIN FORM */}
