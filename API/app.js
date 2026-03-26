@@ -14,7 +14,7 @@ import evaluateRoutes from "./routes/evaluate.js";
 import ChatRouter from './routes/chat.router.js';
 import OrderRouter from './routes/order.router.js';
 import connectDB from "./config/db.js";
-import chatRoutes from "./routes/chat.js";
+// import chatRoutes from "./routes/chat.js";
 // import fileUpload from "express-fileupload";
 // import whatsappRoutes from "./routes/whatsapp.js";
 const razorpayInstance = new Razorpay({
@@ -55,7 +55,7 @@ app.use("/api/payment", paymentRoutes);
 app.use("/product", ProductRouter);
 app.use("/api/evaluate", evaluateRoutes);
 app.use("/api/order", OrderRouter);
-app.use("/api/chat", chatRoutes);
+// app.use("/api/chat", chatRoutes);
 
 // app.use("/webhook", whatsappRoutes);
 // import express from "express";
