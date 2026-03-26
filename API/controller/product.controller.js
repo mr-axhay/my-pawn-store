@@ -17,7 +17,7 @@ export const save = async (req, res) => {
     const result = await cloudinary.uploader.upload(
       caticon.tempFilePath,
       {
-        folder: "pawnshop_caticons",
+        folder: "pawnshop_productIcons",
       }
     );
 
