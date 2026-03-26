@@ -1,45 +1,39 @@
 import "../models/connection.js";
-import url from "url";
-import path from "path";
-import rs from "randomstring";
 import sendWhatsAppMessage from "../utils/twilio.js";
 //to link product model
 import ProductSchemaModel from "../models/product.model.js";
 import Evaluation from "../models/Evaluation.js";
+import cloudinary from "../config/cloudinary.js";
 
 export const save = async (req, res) => {
-  const product = await ProductSchemaModel.find();
-  const l = product.length;
-  const _id = l == 0 ? 1 : product[l - 1]._id + 1;
-
-  const caticon = req.files.caticon;
-  const caticonnm = rs.generate(10) + "_" + Date.now() + "_" + caticon.name;
-
-  const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
-  const uploadfilepath = path.join(
-    __dirname,
-    "../../UI/public/assets/uploads/caticons",
-    caticonnm,
-  );
-
-  const pDetails = {
-    ...req.body,
-    caticonnm: caticonnm,
-    _id: _id,
-    status: "In stock",
-  };
   try {
+    const product = await ProductSchemaModel.find();
+    const l = product.length;
+    const _id = l === 0 ? 1 : product[l - 1]._id + 1;
+    const caticon = req.files.caticon;
+
+    // 🔥 Upload to Cloudinary instead of local storage
+    console.log("FILE OBJECT:", caticon);
+    const result = await cloudinary.uploader.upload(
+      caticon.tempFilePath,
+      {
+        folder: "pawnshop_caticons",
+      }
+    );
+
+    const pDetails = {
+      ...req.body,
+      caticonnm: result.secure_url, // ✅ store URL instead of filename
+      _id: _id,
+      status: "In stock",
+    };
+
     await ProductSchemaModel.create(pDetails);
 
-    caticon.mv(uploadfilepath);
-    // Send WhatsApp alert- commented as it will reduce the balance but it works!
-    // await sendWhatsAppMessage(
-    //   "+917746830045", // user/admin number
-    //   `🛒 New Product Added!\n\nName: ${pDetails.catnm}`
-    // );
+    res.status(201).json({ status: true, data: pDetails });
 
-    res.status(201).json({ status: true });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ status: false });
   }
 };
@@ -56,8 +50,6 @@ export const fetch = async (req, res) => {
       ...decodedQuery,
       status: "In stock",
     };
-
-    console.log("condition_obj", condition_obj);
 
     // ✅ Fetch products
     const pList = await ProductSchemaModel.find(condition_obj);

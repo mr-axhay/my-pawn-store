@@ -14,6 +14,8 @@ import evaluateRoutes from "./routes/evaluate.js";
 import ChatRouter from './routes/chat.router.js';
 import OrderRouter from './routes/order.router.js';
 import connectDB from "./config/db.js";
+import chatRoutes from "./routes/chat.js";
+// import fileUpload from "express-fileupload";
 // import whatsappRoutes from "./routes/whatsapp.js";
 const razorpayInstance = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
@@ -33,8 +35,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //configuration to fetch file content : file upload middleware
-app.use(fileUpload());
-
+// app.use(fileUpload());
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: "/tmp/",
+  createParentPath: true
+}));
 //route level middleware
 app.get("/", (req, res) => {
   res.send("API is running 🚀");
@@ -49,6 +55,8 @@ app.use("/api/payment", paymentRoutes);
 app.use("/product", ProductRouter);
 app.use("/api/evaluate", evaluateRoutes);
 app.use("/api/order", OrderRouter);
+app.use("/api/chat", chatRoutes);
+
 // app.use("/webhook", whatsappRoutes);
 // import express from "express";
 // import mongoose from "mongoose";
