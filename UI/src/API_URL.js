@@ -1,4 +1,5 @@
-const base = "https://my-pawn-store.onrender.com/"; //"http://localhost:3001"
+export const base = "https://my-pawn-store.onrender.com/"; 
+// export const base = "http://localhost:3001/"
 
 export const __userapiurl = base + "user/";
 
