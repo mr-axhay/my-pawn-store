@@ -1,11 +1,10 @@
 import { useState } from "react";
-import './UserHome.css';
+import "./UserHome.css";
 export default function UserHome() {
   const [activeTab, setActiveTab] = useState("details");
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      
       {/* Top Tabs */}
       <div className="flex border-b border-gray-300 bg-gradientt rounded-t-xl px-4">
         <TabButton
@@ -63,11 +62,13 @@ function TabButton({ label, value, activeTab, setActiveTab }) {
 
 /* 🔹 Details */
 function UserDetails() {
+  const email = localStorage.getItem("email");
+  const name = localStorage.getItem("name");
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">User Details</h2>
-      <p className="mb-2">Name: Akshay</p>
-      <p>Email: akshay@gmail.com</p>
+      <p className="mb-2">Name: {name}</p>
+      <p>Email: {email}</p>
     </div>
   );
 }
