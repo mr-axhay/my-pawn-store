@@ -188,3 +188,8 @@
 #memberAcount .userLinks .Contant .linkIcon:hover {
     color: var(--lemon);
 }
+
+.bg-gradientt , .tab-button {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40) !important;
+}
+

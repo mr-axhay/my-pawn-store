@@ -1,123 +1,123 @@
-import "./UserHome.css";
-import { MdAdd } from "react-icons/md";
-import { FaRegCopy } from "react-icons/fa6";
-import { PiFacebookLogoLight } from "react-icons/pi";
-import { PiDiscordLogoLight } from "react-icons/pi";
-import { PiYoutubeLogoLight } from "react-icons/pi";
-import { IoLogoInstagram } from "react-icons/io";
-import { FaXTwitter } from "react-icons/fa6";
-import { MdVerified } from "react-icons/md";
-
-// const AdminHomePage = ({ userInfromation }) => {
-  function UserHome(){
-  const userLinksIcon = {
-    faceBook: PiFacebookLogoLight,
-    YouTube: PiYoutubeLogoLight,
-    Discord: PiDiscordLogoLight,
-    Instagram: IoLogoInstagram,
-    Twitter: FaXTwitter,
-  };
+import { useState } from "react";
+import './UserHome.css';
+export default function UserHome() {
+  const [activeTab, setActiveTab] = useState("details");
 
   return (
-    <section id="memberAcount">
-      <div
-        className="profilePanner mb-5"
-        style={{ backgroundImage: "url('../../public/img/about.webp')" }}
-      >
-        <div className="colorLayr" />
-        <div>
-          <img
-            src={"../../public/img/logo.png"}
-            alt="user Img"
-            className="d-block d-md-none smimg"
-          />
-        </div>
-        <div>
-          <img
-            src={"../../public/img/logo.png"}
-            alt="user Img"
-            className="d-none d-md-block  Lgimg"
-          />
-        </div>
-      </div>
-      <div className="container">
-        <div className="row pt-4 mx-1">
-          <div className="col-12 col-md-6 userInfoSection">
-            <div className="d-flex justify-content-center justify-content-md-start align-items-center gap-2">
-              <span>Admin{/* {userInfromation.userName} */}</span>
-             (
-                <MdVerified className="VerifiedIcon" />
-              )
-            </div>
-            <div className="d-block d-md-none smbuttonSection mt-3 pb-1">
-              <div className="btnSection d-flex justify-content-center align-items-center gap-2 py-3">
-                <FaRegCopy className="reactIcons" />
-                <span>User ID</span>
-                {/* <span>{userInfromation.userID}</span> */}
-              </div>
-              <div className="btnSectionoutLone d-flex justify-content-center align-items-center gap-2 py-3 mt-3">
-                <MdAdd className="reactIcons lemon" />
-                <span>Follow</span>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center justify-content-md-start text-center text-md-start gap-5 userState mt-4">
-              <div className=" me-lg-3">
-                <span className="d-block stateNumper">
-                  {/* {userInfromation.Volume} */}+
-                </span>
-                <span className="stateName">Total Users</span>
-              </div>
-              <div className="mx-lg-3">
-                <span className="d-block stateNumper">
-               1111  {/*  {userInfromation.NFTsSold} */}+
-                </span>
-                <span className="stateName">Registered Products</span>
-              </div>
-              <div className="mx-lg-3">
-                <span className="d-block stateNumper">
-                 22
-                </span>
-                <span className="stateName">Categories</span>
-              </div>
-            </div>
-            {/* userInfromation?.bio?.length > 0 && */ (
-              <div className="userBio mt-4">
-                <span className="d-block bioTitle">Bio</span>
-                <span className="bioContant d-flex mt-2">
-                  {/* {userInfromation.bio} */}My BIO
-                </span>
-              </div>
-            )}
-            {/* {userInfromation?.userLinks?.length > 0 && (
-              <div className="userLinks mt-4">
-                <span className="d-block Title">Links</span>
-                <span className="Contant d-flex mt-2 align-items-center">
-                  {userInfromation.userLinks.map((iconName, index) => {
-                    const ReactIconName = userLinksIcon[iconName];
-                    return (
-                      <ReactIconName key={index} className="linkIcon me-2" />
-                    );
-                  })}
-                </span>
-              </div>
-            )} */}
-          </div>
-          <div className="col-md-6 d-none d-md-block buttonSection ">
-            <div className="d-flex justify-content-end gap-3">
-              <div className="btnSection d-flex justify-content-center align-items-center gap-2 py-3 px-3">
-                <FaRegCopy className="reactIcons" />
-                <span>AKSHYA_MR{/* {userInfromation.userID} */}</span>
-              </div>
-              <div className="btnSectionoutLone d-flex justify-content-center align-items-center gap-2 py-3 px-3">
-                <MdAdd className="reactIcons lemon" />
-                <span>Dummy</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+    <div className="p-6 bg-gray-100 min-h-screen">
+      
+      {/* Top Tabs */}
+      <div className="flex border-b border-gray-300 bg-gradientt rounded-t-xl px-4">
+        <TabButton
+          label="Details"
+          value="details"
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
 
-export default UserHome;
+        <TabButton
+          label="Change Password"
+          value="changePassword"
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+
+        <TabButton
+          label="Edit Profile"
+          value="editProfile"
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+      </div>
+
+      {/* Content Area */}
+      <div className="bg-gradientt p-6 rounded-b-xl shadow-md">
+        {activeTab === "details" && <UserDetails />}
+        {activeTab === "changePassword" && <ChangePassword />}
+        {activeTab === "editProfile" && <EditProfile />}
+      </div>
+    </div>
+  );
+}
+
+/* 🔹 Tab Button */
+function TabButton({ label, value, activeTab, setActiveTab }) {
+  const isActive = activeTab === value;
+
+  return (
+    <button
+      onClick={() => setActiveTab(value)}
+      className={`tab-button relative px-6 py-4 text-sm font-semibold transition-all duration-300
+        ${isActive ? "text-purple-600" : "text-gray-500 hover:text-gray-700"}
+      `}
+    >
+      {label}
+
+      {/* Underline Indicator */}
+      {isActive && (
+        <span className="absolute left-0 bottom-0 w-full h-[2px] bg-purple-600"></span>
+      )}
+    </button>
+  );
+}
+
+/* 🔹 Details */
+function UserDetails() {
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-4">User Details</h2>
+      <p className="mb-2">Name: Akshay</p>
+      <p>Email: akshay@gmail.com</p>
+    </div>
+  );
+}
+
+/* 🔹 Change Password */
+function ChangePassword() {
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Change Password</h2>
+
+      <input
+        type="password"
+        placeholder="Old Password"
+        className="border p-2 w-full mb-3 rounded"
+      />
+
+      <input
+        type="password"
+        placeholder="New Password"
+        className="border p-2 w-full mb-3 rounded"
+      />
+
+      <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+        Update Password
+      </button>
+    </div>
+  );
+}
+
+/* 🔹 Edit Profile */
+function EditProfile() {
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
+
+      <input
+        type="text"
+        placeholder="Name"
+        className="border p-2 w-full mb-3 rounded"
+      />
+
+      <input
+        type="email"
+        placeholder="Email"
+        className="border p-2 w-full mb-3 rounded"
+      />
+
+      <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Save Changes
+      </button>
+    </div>
+  );
+}
