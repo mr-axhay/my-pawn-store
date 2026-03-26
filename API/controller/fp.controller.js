@@ -5,12 +5,12 @@ const ForgetPassword = (req, res) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "mr.axhay@gmail.com",
-      pass: "ebacuoxshelpbvkr",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
   let mailOptions = {
-    from: "mr.axhay@gmail.com",
+    from: process.env.EMAIL_USER,
     to: email,
     subject: "Link For ForgetPassword PawnShop",
     html: `
@@ -23,7 +23,6 @@ const ForgetPassword = (req, res) => {
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
-
     if (error) {
       console.log(error);
     } else {

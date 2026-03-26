@@ -48,7 +48,7 @@ const ForgotPassword = () => {
                         alt="forgot visual"
                         className="h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/30"></div>
+                    <div className="absolute inset-0"></div>
                 </div>
 
                 {/* RIGHT FORM */}
