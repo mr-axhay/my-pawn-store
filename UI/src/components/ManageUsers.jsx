@@ -2,11 +2,8 @@ import './ManageUsers.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { __userapiurl } from '../API_URL';
-import { useNavigate } from 'react-router-dom';
 
 function ManageUsers() {
-
-  const navigate = useNavigate();
   const [users, setUserDetails] = useState([]);
 
   useEffect(() => {
@@ -22,7 +19,7 @@ function ManageUsers() {
 
   const manageUserStatus = (_id, s) => {
     if (s == "active") {
-      var data = { "condition_obj": { "_id": _id }, "content_obj": { "status": 1 } };
+      const data = { "condition_obj": { "_id": _id }, "content_obj": { "status": 1 } };
       axios.patch(__userapiurl + "update", data).then((response) => {
         alert("User profile activated successfully....");
         // navigate("/manageUsers");
@@ -31,16 +28,16 @@ function ManageUsers() {
       });
     }
     else if (s == "inactive") {
-      var data = { "condition_obj": { "_id": _id }, "content_obj": { "status": 0 } };
+      const data = { "condition_obj": { "_id": _id }, "content_obj": { "status": 0 } };
       axios.patch(__userapiurl + "update", data).then((response) => {
-        alert("User profile in-activated successfully....");
+        alert("User profile deactivated successfully....");
         // navigate("/manageUsers");
         setUserDetails(response.data.info);
 
       });
     }
     else {
-      var data = { "data": { "_id": _id } };
+      const data = { "data": { "_id": _id } };
       axios.delete(__userapiurl + "delete", data).then((response) => {
         alert("User profile deleted successfully....");
         // navigate("/manageUsers");

@@ -17,19 +17,17 @@ import SubCategories from "./components/SubCategories";
 import AddSubCategory from "./components/AddSubCategory";
 import { useLocation } from "react-router-dom";
 import SubAdminHomePage from "./components/SubAdminHomePage";
-import ExpertDashboard from "./components/ExpertDashboard";
 import OpenAIChat from "./components/OpenAIChat";
 import AllProducts from "./components/AllProducts";
 import Orders from "./components/Orders";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
-
+import EvaluateRequests from "./components/EvaluateRequests";
 
 function App() {
   const location = useLocation();
 
   const isHomePage = location.pathname === "/";
-
   return (
     <main className="relative min-h-screen w-screen overflow-x-hidden">
       <NavBar />
@@ -44,6 +42,7 @@ function App() {
           <Route path='/subCategories/:name' element={<SubCategories />} ></Route>
           <Route path='/admin' element={<AdminHomePage />} ></Route>
           <Route path='/addCategory' element={<AddCategory />} ></Route>
+          <Route path='/editCategory/:id' element={<AddCategory />} ></Route>
           <Route path='/addSubCategory/:name' element={<AddSubCategory />} ></Route>
           <Route path='/pay' element={<PaymentButton />} ></Route>
           <Route path='/userHome' element={<UserHome />} ></Route>
@@ -53,7 +52,7 @@ function App() {
           <Route path='/viewProduct/:id' element={<ViewProduct />} ></Route>
           <Route path='/editProduct/:id' element={<AddProduct />} ></Route>
           <Route path='/subadmin' element={<SubAdminHomePage />} ></Route>
-          <Route path='/expertDashboard' element={<ExpertDashboard />} ></Route>
+          <Route path='/productRequests' element={<EvaluateRequests />} ></Route>
           <Route path='/orders' element={<Orders />} ></Route>
           <Route path='/forgot-password' element={<ForgotPassword />} ></Route>
           <Route path='/reset-password/:email' element={<ResetPassword />} ></Route>

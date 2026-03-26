@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { __categoryapiurl } from "../API_URL";
 import Button from "./Button";
 import { useEffect, useState } from "react";
@@ -7,15 +7,22 @@ import "./Categories.css";
 
 function Categories() {
   const navigate = useNavigate();
+  
+
+  // const editCategory = (id,event) => {
+  //   event.stopPropagation();
+  //   //navigate to add categ
+  //   navigate(`/editCategory/${id}`);
+  // };
 
   const addCategory = () => {
     //navigate to add categ
     navigate("/addCategory");
   };
 
-  const goToSubCategory = (name) => {
+  const goToSubCategory = (id) => {
     //navigate to add categ
-    navigate(`/subCategories/${name}`);
+    navigate(`/subCategories/${id}`);
   };
 
   const goToAddSubCategory = (event, name) => {
@@ -24,12 +31,12 @@ function Categories() {
     navigate(`/addSubCategory/${name}`);
   };
 
-  const removeCategory = (name, event) => {
+  const removeCategory = (id, event) => {
     event.stopPropagation();
     axios
       .delete(__categoryapiurl + "delete", {
         data: {
-          condition_obj: JSON.stringify({ catnm: name }),
+          condition_obj: JSON.stringify({ _id: id }),
         },
       })
       .then((response) => {
@@ -69,19 +76,19 @@ function Categories() {
             containerClass="add-category-btn"
           />
         </div>
-
+        { categories.length ?  
         <div className="category-grid">
           {categories.map((cat) => (
             <div
               className="category-card"
               key={cat._id}
-              onClick={() => goToSubCategory(cat.catnm)}
+              onClick={() => goToSubCategory(cat._id)}
             >
-              {/* <Button title='edit'></Button> */}
-              <i className="bi bi-pencil-fill"></i>
+             {/*  <i className="bi bi-pencil-fill"
+              onClick={(event)=> editCategory(cat._id,event)}></i> */}
               <i
                 className="bi bi-x-octagon-fill"
-                onClick={($event) => removeCategory(cat.catnm, $event)}
+                onClick={($event) => removeCategory(cat._id, $event)}
               ></i>
               <div className="image">
                 <img src={cat.caticonnm} alt={cat.catnm} />
@@ -94,6 +101,9 @@ function Categories() {
             </div>
           ))}
         </div>
+        :
+        <h2>No Categories Found</h2>
+}
       </div>
     </>
   );

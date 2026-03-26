@@ -2,7 +2,6 @@ import clsx from "clsx";
 import gsap from "gsap";
 import { useWindowScroll } from "react-use";
 import { useEffect, useRef, useState, useCallback } from "react";
-import { TiLocationArrow } from "react-icons/ti";
 import { HiOutlineMenu, HiX } from "react-icons/hi"; // or "react-icons/hi2" if you're on v2
 import Button from "./Button";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -34,7 +33,6 @@ const NavBar = () => {
 
   const isAuthed = !!localStorage.getItem("token");
   const isAdmin = localStorage.getItem("role") === "admin";
-  
 
   useEffect(() => {
     if (isAudioPlaying) {
@@ -114,13 +112,13 @@ const NavBar = () => {
               {/* Desktop menu */}
               <div className="hidden md:block">
                 {navItems.map((item, index) => (
-                  <a
+                  <NavLink
                     key={index}
-                    href={`#${item.toLowerCase()}`}
+                    to={`/#${item.toLowerCase()}`}
                     className="nav-hover-btn"
                   >
                     {item}
-                  </a>
+                  </NavLink>
                 ))}
 
                 {!isAuthed ? (
@@ -139,6 +137,12 @@ const NavBar = () => {
                   <>
                     {isAdmin ? (
                       <>
+                        <NavLink
+                          to="/productRequests"
+                          className="nav-hover-btn"
+                        >
+                          Requests
+                        </NavLink>
                         <NavLink to="/manageUsers" className="nav-hover-btn">
                           Manage users
                         </NavLink>
@@ -157,7 +161,6 @@ const NavBar = () => {
                         <NavLink to="/myProducts" className="nav-hover-btn">
                           My Products
                         </NavLink>
-
                       </>
                     )}
                     <NavLink to="/logout" className="nav-hover-btn">

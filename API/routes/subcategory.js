@@ -9,7 +9,7 @@ router.post("/save",SubCategoryController.save);
 
 router.get("/fetch",SubCategoryController.fetch);
 
-router.delete("/delete",SubCategoryController.deleteUser);
+router.delete("/delete",SubCategoryController.deleteSubCategory);
 
 router.patch("/update",SubCategoryController.update);
 

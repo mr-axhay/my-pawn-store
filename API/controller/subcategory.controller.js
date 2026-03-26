@@ -22,8 +22,8 @@ export const save = async (req, res) => {
     await SubCategorySchemaModel.create(scDetails);
     // caticon.mv(uploadfilepath);
     res.status(201).json({ status: true });
-  } catch(err) {
-    console.log(err)
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ status: false });
   }
 };
@@ -35,20 +35,22 @@ export const fetch = async (req, res) => {
   else res.status(404).json({ status: false });
 };
 
-export var deleteUser = async (req, res) => {
+export var deleteSubCategory = async (req, res) => {
   try {
-    let cDetails = await CategorySchemaModel.findOne(
+    let scDetails = await SubCategorySchemaModel.findOne(
       JSON.parse(req.body.condition_obj),
     );
-    if (cDetails) {
-      let category = await CategorySchemaModel.deleteOne(
+    if (scDetails) {
+      await SubCategorySchemaModel.deleteOne(
         JSON.parse(req.body.condition_obj),
       );
       var scList = await SubCategorySchemaModel.find();
-      if (scList.length != 0)
+      try {
         res.status(200).json({ status: true, info: scList });
-      else res.status(404).json({ status: false });
-    } else res.status(404).json({ status: "Requested resource not available" });
+      } catch {
+        res.status(404).json({ status: "Requested resource not available" });
+      }
+    }
   } catch (error) {
     res.status(500).json({ status: false });
   }

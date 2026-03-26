@@ -13,12 +13,12 @@ function SubCategories() {
     navigate(`/addSubCategory/${name}`);
   };
   const [categories, setCategories] = useState([]);
-  const removeSubCategory = (name, event) => {
+  const removeSubCategory = (id, event) => {
     event.stopPropagation();
     axios
       .delete(__subcategoryapiurl + "delete", {
         data: {
-          condition_obj: JSON.stringify({ subcatnm: name }),
+          condition_obj: JSON.stringify({ _id: id }),
         },
       })
       .then((response) => {
@@ -58,13 +58,13 @@ function SubCategories() {
 
         <div className="category-grid">
           {categories.length ? (
-            categories.map((cat, index) => (
+            categories.map((cat) => (
               <div className="category-card" key={cat._id}>
                 {/* <Button title='edit'></Button> */}
-                <i className="bi bi-pencil-fill"></i>
+                {/* <i className="bi bi-pencil-fill"></i> */}
                 <i
                   className="bi bi-x-octagon-fill"
-                  onClick={($event) => removeSubCategory(cat.subcatnm, $event)}
+                  onClick={($event) => removeSubCategory(cat._id, $event)}
                 ></i>
                 <div className="image">
                   <img src={cat.subcaticonnm} alt={cat.subcatnm} />
@@ -74,7 +74,7 @@ function SubCategories() {
               </div>
             ))
           ) : (
-            <h1>No Category Data found</h1>
+            <h1>No Sub-Category Data found</h1>
           )}
         </div>
       </div>
