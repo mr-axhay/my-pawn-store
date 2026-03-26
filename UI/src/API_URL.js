@@ -1,11 +1,11 @@
-export const __userapiurl="http://localhost:3001/user/";
+const base = "https://my-pawn-store.onrender.com/"; //"http://localhost:3001"
 
-export const __categoryapiurl="http://localhost:3001/category/";
+export const __userapiurl = base + "user/";
 
-export const __subcategoryapiurl="http://localhost:3001/subcategory/";
+export const __categoryapiurl = base + "category/";
 
-export const __forgetpasswordurl="http://localhost:3001/forgetpassword/";
+export const __subcategoryapiurl = base + "subcategory/";
 
-export const __productapiurl="http://localhost:3001/product/";
+export const __forgetpasswordurl = base + "forgetpassword/";
 
-
+export const __productapiurl = base + "product/";
