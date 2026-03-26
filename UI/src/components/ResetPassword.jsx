@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { __userapiurl } from '../API_URL';
+import { base } from '../API_URL';
 import './Login.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -48,7 +48,7 @@ const ResetPassword = () => {
 
         const userDetails = { decodedEmail, password :newPassword};
 
-        axios.post(__userapiurl + "resetPassword", userDetails)
+        axios.post(base + "resetPassword", userDetails)
             .then((response) => {
                 const users = response.data.info;
 
