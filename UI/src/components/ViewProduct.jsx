@@ -41,7 +41,7 @@ const ViewProduct = () => {
   // 🔥 Evaluate Request
   const handleEvaluate = async () => {
     try {
-      await axios.post("http://localhost:3001/api/evaluate", {
+      await axios.post("https://my-pawn-store.onrender.com/api/evaluate", {
         productId: productDetail._id,
       });
 
@@ -58,7 +58,7 @@ const ViewProduct = () => {
     try {
       // Create order from backend
       const orderData = await fetch(
-        "http://localhost:3001/api/payment/create-order",
+        "https://my-pawn-store.onrender.com/api/payment/create-order",
         {
           method: "POST",
           headers: {
@@ -80,7 +80,7 @@ const ViewProduct = () => {
 
         handler: async function (response) {
           const verify = await fetch(
-            "http://localhost:3001/api/payment/verify-payment",
+            "https://my-pawn-store.onrender.com/api/payment/verify-payment",
             {
               method: "POST",
               headers: {
@@ -94,7 +94,7 @@ const ViewProduct = () => {
 
           if (result.success) {
             toast("Payment Successful");
-            await axios.post("http://localhost:3001/api/order/save", {
+            await axios.post("https://my-pawn-store.onrender.com/api/order/save", {
               userId: email,
               name,
               email,

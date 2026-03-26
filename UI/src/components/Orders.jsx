@@ -8,7 +8,7 @@ const Orders = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/order/fetch", {
+      .get("https://my-pawn-store.onrender.com/api/order/fetch", {
         params: { userId: email },
       })
       .then((res) => setOrders(res.data.info));

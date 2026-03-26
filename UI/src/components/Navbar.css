@@ -25,3 +25,7 @@ background: linear-gradient(135deg, #000000, #1f2937);
     justify-content: flex-end;
    } 
 }
+
+.audio-btn{
+   transform: none !important;
+}

@@ -2,7 +2,7 @@ const PaymentButton = () => {
   const handlePayment = async () => {
     try {
       // Create order from backend
-      const orderData = await fetch("http://localhost:3001/api/payment/create-order", {
+      const orderData = await fetch("https://my-pawn-store.onrender.com/api/payment/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,7 +22,7 @@ const PaymentButton = () => {
 
         handler: async function (response) {
 
-          const verify = await fetch("http://localhost:3001/api/payment/verify-payment", {
+          const verify = await fetch("https://my-pawn-store.onrender.com/api/payment/verify-payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -15,7 +15,7 @@ const OpenAIChat = () => {
         setMessages(prev => [...prev, userMessage]);
         setInput("");
         setIsLoading(true);
-        const res = await axios.post("http://localhost:3001/chat", {
+        const res = await axios.post("https://my-pawn-store.onrender.com/chat", {
             message: input,
             userId: "user123",
             product: {

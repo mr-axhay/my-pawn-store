@@ -7,7 +7,7 @@ const ExpertDashboard = () => {
   // Fetch evaluation requests
   const fetchRequests = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/api/evaluate");
+      const res = await axios.get("https://my-pawn-store.onrender.com/api/evaluate");
       setRequests(res.data);
     } catch (err) {
       console.log(err);
@@ -20,13 +20,13 @@ const ExpertDashboard = () => {
 
   // Approve
   const handleApprove = async (id) => {
-    await axios.put(`http://localhost:3001/api/evaluate/${id}/approve`);
+    await axios.put(`https://my-pawn-store.onrender.com/api/evaluate/${id}/approve`);
     fetchRequests();
   };
 
   // Reject
   const handleReject = async (id) => {
-    await axios.put(`http://localhost:3001/api/evaluate/${id}/reject`);
+    await axios.put(`https://my-pawn-store.onrender.com/api/evaluate/${id}/reject`);
     fetchRequests();
   };
 
