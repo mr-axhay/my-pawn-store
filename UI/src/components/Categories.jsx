@@ -84,7 +84,7 @@ function Categories() {
                 onClick={($event) => removeCategory(cat.catnm, $event)}
               ></i>
               <div className="image">
-                <img src={cat.caticonnm} alt="product" />
+                <img src={cat.caticonnm} alt={cat.catnm} />
               </div>
               <h3>{cat.catnm}</h3>
               <Button
