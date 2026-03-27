@@ -26,7 +26,7 @@ const ForgetPassword = (req, res) => {
     if (error) {
       console.log(error);
     } else {
-      console.log("Email sent: " + info.response);
+      console.log("Email sent:: " + info.response);
       res.status(200).json({ status: true });
     }
   });

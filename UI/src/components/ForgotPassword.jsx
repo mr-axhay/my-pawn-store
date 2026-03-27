@@ -23,14 +23,14 @@ const ForgotPassword = () => {
 
     const handleSubmit = () => {
         if (!validate()) {
-            toast.error("Please fix the error");
+            toast.error("Please fix the error"); 
             return;
         }
 
         axios.post(__forgetpasswordurl, { email })
             .then(() => {
                 toast.success("Reset link sent to your email!");
-                setEmail("");
+                setEmail(""); 
             })
             .catch(() => {
                 toast.error("Email not found");
