@@ -43,11 +43,7 @@ function AllProducts() {
               >
                
                 <div className="image">
-                  <img
-                    src={`../../public/assets/uploads/caticons/${cat.caticonnm}`}
-                    alt={cat.catnm}
-                    className="Product-avatar"
-                  />
+                    <img src={cat.caticonnm} alt="product" />
                 </div>
                 <h3>{cat.catnm}</h3>
               </div>
