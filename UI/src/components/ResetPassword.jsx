@@ -52,11 +52,12 @@ const ResetPassword = () => {
             .then((response) => {
                 const users = response.data.info;
 
-                toast.success("Password Reset Successfully !");
+                toast("Password Reset Successfully !");
 
                 navigate("/login");
             })
-            .catch(() => {
+            .catch((error) => {
+                console.log(error)
                 toast.error("Invalid user or verify your account");
                 // setEmail("");
                 // setPassword("");
