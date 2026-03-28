@@ -215,28 +215,17 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
 const UserHome = () => (
   <section className="bg-black pb-52">
     <div className="container mx-auto px-3 md:px-10">
-      {/* <div className="px-5 py-32">
-        <p className="font-circular-web text-lg text-blue-50">
-          Welcome To Admin Panel
+      <div className="px-4 py-4">
+        <p className="font-circular-web text-2xl text-blue-50">
+          Welcome To User Panel
         </p>
-        <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
-          Step into a dynamic marketplace where a diverse range of items—from timeless
-          valuables to everyday essentials—come together in a seamless pawn shop experience,
-          connecting your needs with opportunity in one place.
-        </p>
-      </div> */}
+      </div>
 
       <div className="grid h-[135vh] w-full grid-cols-2 grid-rows-3 gap-7">
         <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2">
           <BentoCard
-            src="https://img.freepik.com/free-photo/closeup-scarlet-macaw-from-side-view-scarlet-macaw-closeup-head_488145-3540.jpg?semt=ais_incoming&w=740&q=80"
-            title={
-              <>
-                 Welcome <b> To Admin </b> Panel
-              </>
-            }
-            // description="An anime and gaming-inspired NFT collection - the IP primed for expansion."
-            isComingSoon
+            src="img/user3.jpg"
+          isComingSoon
           />
         </BentoTilt>
 
@@ -245,7 +234,7 @@ const UserHome = () => (
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2fjXAnhJL0kvh3p-Qpcz4ZxaMTqukNEEAVA&s"
             title={
               <>
-                Manage <b>Users </b>
+                My <b>Products </b>
               </>
             }
             // description="A gamified social hub, adding a new dimension of play to social interaction for Web3 communities."
@@ -255,10 +244,10 @@ const UserHome = () => (
 
         <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
           <BentoCard
-            src="img/logo.png"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2fjXAnhJL0kvh3p-Qpcz4ZxaMTqukNEEAVA&s"
             title={
               <>
-                Add<b> Categories</b>
+                Add<b> Product</b>
               </>
             }
             // description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
@@ -267,10 +256,10 @@ const UserHome = () => (
         </BentoTilt>
         <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
           <BentoCard
-            src="videos/settings.mp"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2fjXAnhJL0kvh3p-Qpcz4ZxaMTqukNEEAVA&s"
             title={
               <>
-                Add <b>Sub Categories</b>
+                Edit <b>Profile</b>
               </>
             }
             // description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
@@ -279,10 +268,10 @@ const UserHome = () => (
         </BentoTilt>
           <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
           <BentoCard
-            src="videos/settings.mp"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2fjXAnhJL0kvh3p-Qpcz4ZxaMTqukNEEAVA&s"
             title={
               <>
-                <b>Settings</b>
+                <b>Change Password</b>
               </>
             }
             // description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
