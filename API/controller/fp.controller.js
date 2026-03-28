@@ -1,34 +1,44 @@
 import nodemailer from "nodemailer";
+const ForgetPassword = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587, // ✅ IMPORTANT
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+      family: 4,
+    });
 
-const ForgetPassword = (req, res) => {
-  const email = req.body.email;
-  let transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-  let mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "Link For ForgetPassword PawnShop",
-    html: `
-  <h1>Welcome to Pawn Shop</h1>
-  <h2>Click below to Reset Password</h2>
-  <a href='${process.env.FRONTEND_URL}/reset-password/${encodeURIComponent(email)}'>
-    Click to reset password
-  </a>
-`,
-  };
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Link For Forget Password PawnShop",
+      html: `
+        <h1>Welcome to Pawn Shop</h1>
+        <h2>Click below to Reset Password</h2>
+        <a href='${process.env.FRONTEND_URL}/reset-password/${encodeURIComponent(email)}'>
+          Click to reset password
+        </a>
+      `,
+    };
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email sent:: " + info.response);
-      res.status(200).json({ status: true });
-    }
-  });
+    await transporter.sendMail(mailOptions);
+
+    console.log("✅ Email sent successfully");
+    res.status(200).json({ message: "Reset link sent" });
+
+  } catch (error) {
+    console.error("❌ Email Error:", error);
+
+    res.status(500).json({
+      message: "Failed to send email",
+      error: error.message,
+    });
+  }
 };
+
 export default ForgetPassword;
