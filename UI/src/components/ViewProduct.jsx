@@ -145,7 +145,8 @@ const ViewProduct = () => {
             onClick={() => navigate("/myProducts")}
           ></i>
           <img
-            src={`../../public/assets/uploads/caticons/${selectedImage}`}
+            // src={`../../public/assets/uploads/caticons/${selectedImage}`}
+             src={selectedImage}
             className="rounded-2xl w-full h-[400px] object-cover"
           />
 
@@ -153,7 +154,7 @@ const ViewProduct = () => {
             {productDetail.images?.map((img, i) => (
               <img
                 key={i}
-                src={`../../public/assets/uploads/caticons/${img}`}
+                src={img}
                 onClick={() => setSelectedImage(img)}
                 className="w-20 h-20 rounded-lg cursor-pointer"
               />
