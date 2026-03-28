@@ -22,12 +22,16 @@ import AllProducts from "./components/AllProducts";
 import Orders from "./components/Orders";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import ChatWidget from "./components/ChatWidget";
 import EvaluateRequests from "./components/EvaluateRequests";
+import ChangePass from "./components/ChangePass";
+import EditProfile from "./components/EditProfile";
 
 function App() {
   const location = useLocation();
 
   const isHomePage = location.pathname === "/";
+  const isLoggedIn = localStorage.getItem('email')
   return (
     <main className="relative min-h-screen w-screen overflow-x-hidden">
       <NavBar />
@@ -56,10 +60,12 @@ function App() {
           <Route path='/orders' element={<Orders />} ></Route>
           <Route path='/forgot-password' element={<ForgotPassword />} ></Route>
           <Route path='/reset-password/:email' element={<ResetPassword />} ></Route>
-
+          <Route path='/changePassword' element={<ChangePass />} ></Route>
+          <Route path='/editProfile' element={<EditProfile />} ></Route>
         </Routes>
       </div>
-      <OpenAIChat />
+      
+     {  isLoggedIn ?    <ChatWidget />: <OpenAIChat /> }
     </main>
   );
 }
