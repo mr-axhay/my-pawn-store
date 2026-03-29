@@ -103,7 +103,7 @@ const NavBar = () => {
                 id="charity-button"
                 title="Charity"
                 onClick={handlePayment}
-                containerClass="bg-blue-50 flex items-center justify-center gap-1"
+                containerClass="hidden md:flex bg-blue-50 flex items-center justify-center gap-1"
               />
             </div>
 
@@ -160,6 +160,13 @@ const NavBar = () => {
                         </NavLink>
                         <NavLink to="/myProducts" className="nav-hover-btn">
                           My Products
+                        </NavLink>
+
+                        <NavLink to="/changePassword" className="nav-hover-btn">
+                          Change Password
+                        </NavLink>
+                        <NavLink to="/editProfile" className="nav-hover-btn">
+                          Update Profile
                         </NavLink>
                       </>
                     )}
@@ -294,8 +301,11 @@ const NavBar = () => {
             <>
               {isAdmin ? (
                 <>
-                  <NavLink to="/products" className="nav-hover-btn">
+                  <NavLink to="/products" className="nav-hover-btn py-2">
                     Products
+                  </NavLink>
+                  <NavLink to="/productRequests" className="nav-hover-btn py-2">
+                    Requests
                   </NavLink>
                   <NavLink
                     to="/manageUsers"
@@ -314,7 +324,7 @@ const NavBar = () => {
                 </>
               ) : (
                 <>
-                  <NavLink to="/products" className="nav-hover-btn">
+                  <NavLink to="/products" className="nav-hover-btn py-2">
                     Products
                   </NavLink>
                   <NavLink
@@ -323,6 +333,12 @@ const NavBar = () => {
                     onClick={closeMenu}
                   >
                     My Products
+                  </NavLink>
+                  <NavLink to="/changePassword" className="nav-hover-btn py-2">
+                    Change Password
+                  </NavLink>
+                  <NavLink to="/editProfile" className="nav-hover-btn py-2">
+                    Update Profile
                   </NavLink>
                 </>
               )}

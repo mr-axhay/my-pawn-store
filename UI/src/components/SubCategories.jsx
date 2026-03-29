@@ -13,6 +13,7 @@ function SubCategories() {
     navigate(`/addSubCategory/${name}`);
   };
   const [categories, setCategories] = useState([]);
+  const [categoryName, setCategoryName] = useState("");
   const removeSubCategory = (id, event) => {
     event.stopPropagation();
     axios
@@ -36,6 +37,7 @@ function SubCategories() {
       .then((response) => {
         //console.log(response.data.info);
         setCategories(response.data.info);
+        setCategoryName(response.data.catName);
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +48,7 @@ function SubCategories() {
     <>
       <div className="categories-wrapper">
         <div className="categories-header">
-          <h2>{name}</h2>
+          <h2>{categoryName}</h2>
 
           <Button
             id="category-button"
@@ -69,8 +71,7 @@ function SubCategories() {
                 <div className="image">
                   <img src={cat.subcaticonnm} alt={cat.subcatnm} />
                 </div>
-                <h3>{cat.subcatnm}</h3>
-                <h4>{cat.catnm}</h4>
+                <h3 className="py-2">{cat.subcatnm}</h3>
               </div>
             ))
           ) : (

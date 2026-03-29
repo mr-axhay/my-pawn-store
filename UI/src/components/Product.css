@@ -1,4 +1,3 @@
-
 /* --------------Wrapper */
 .Product-wrapper {
   width: 100%;
@@ -33,13 +32,13 @@
   background: linear-gradient(135deg, #111827, #1f2937);
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   transition: 0.3s;
 }
 
 .Product-card:hover {
-  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
   transform: translateY(-5px);
 }
 
@@ -78,4 +77,9 @@
 /* Button spacing */
 .Product-card button {
   margin-top: 10px;
+}
+
+.image {
+  height: 200px;
+  width: auto;
 }
